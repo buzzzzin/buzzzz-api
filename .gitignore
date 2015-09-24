@@ -1,0 +1,7 @@
+.idea/
+build/
+homeScreen.iml
+*.iml
+classes/
+out/
+.gradle/
