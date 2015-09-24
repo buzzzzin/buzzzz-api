@@ -1,4 +1,4 @@
-package in.buzzzz.exceptions;
+package in.buzzzz.util.exceptions;
 
 /**
  * Created by ekansh on 24/9/15.

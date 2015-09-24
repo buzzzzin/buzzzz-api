@@ -1,4 +1,4 @@
-package in.buzzzz.config;
+package in.buzzzz.config.filter;
 
 import org.springframework.stereotype.Component;
 

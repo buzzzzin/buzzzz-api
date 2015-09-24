@@ -1,4 +1,4 @@
-package in.buzzzz.bootstrap;
+package in.buzzzz.config.bootstrap;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;

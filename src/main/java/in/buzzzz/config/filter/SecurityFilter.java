@@ -1,4 +1,4 @@
-package in.buzzzz.security;
+package in.buzzzz.config.filter;
 
 import javax.servlet.*;
 import java.io.IOException;

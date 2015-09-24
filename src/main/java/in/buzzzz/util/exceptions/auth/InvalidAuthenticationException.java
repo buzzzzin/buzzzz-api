@@ -1,6 +1,6 @@
-package in.buzzzz.exceptions.auth;
+package in.buzzzz.util.exceptions.auth;
 
-import in.buzzzz.exceptions.AuthenticationException;
+import in.buzzzz.util.exceptions.AuthenticationException;
 
 /**
  * Created by ekansh on 24/9/15.
