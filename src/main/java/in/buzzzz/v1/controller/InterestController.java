@@ -23,7 +23,6 @@ public class InterestController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseDto list(@RequestBody(required = false) InterestCommand interest,
                             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
-        System.out.println("I am in list......");
         return prepareInterestResponseService.createInterestListResponse(interestService.list(interest), locale);
     }
 
