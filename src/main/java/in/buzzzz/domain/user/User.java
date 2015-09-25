@@ -3,6 +3,8 @@ package in.buzzzz.domain.user;
 import in.buzzzz.data.interest.InterestData;
 import in.buzzzz.v1.co.user.UserCommand;
 import in.buzzzz.v1.data.user.UserInfoDto;
+import in.buzzzz.v1.data.user.UserProfileDto;
+import in.buzzzz.v1.data.user.UserStatsDto;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
@@ -43,7 +45,7 @@ public class User {
         this.email = userCommand.getEmail();
         this.mobile = userCommand.getMobile();
         this.country = userCommand.getCountry();
-        this.medium = userCommand.getMedium();
+        this.medium = new RegistrationMedium(userCommand.getMediumId(),userCommand.getMediumType());
         this.interests = userCommand.getInterests();
     }
 
@@ -66,6 +68,19 @@ public class User {
         infoDto.setCountry(this.country!=null?this.country:"");
         infoDto.setMedium(this.medium);
         return infoDto;
+    }
+    public UserStatsDto convertToUserStatsDto(){
+        UserStatsDto statsDto = new UserStatsDto();
+        statsDto.setBuzzCount(0L);
+        statsDto.setInterestCount(0L);
+        return statsDto;
+    }
+
+    public UserProfileDto convertToUserProfileDto(){
+        UserProfileDto profileDto = new UserProfileDto();
+        profileDto.setUser(this.convertToUserInfoDto());
+        profileDto.setStats(this.convertToUserStatsDto());
+        return profileDto;
     }
 
     public String getId() {

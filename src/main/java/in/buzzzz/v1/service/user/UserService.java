@@ -30,10 +30,7 @@ public class UserService {
 
     public UserProfileDto getOthersProfile(String userId){
         User user = userRepository.findById(userId);
-        UserProfileDto profileDto = new UserProfileDto();
-        profileDto.setUser(user.convertToUserInfoDto());
-        profileDto.setStats(null);
-        return profileDto;
+        return user.convertToUserProfileDto();
     }
 
 }
