@@ -1,21 +1,47 @@
-package in.buzzzz.v1.data.user;
+package in.buzzzz.v1.co.user;
 
-import in.buzzzz.data.user.UserData;
+import in.buzzzz.co.ValidateCommand;
+import in.buzzzz.data.interest.InterestData;
 import in.buzzzz.domain.user.RegistrationMedium;
 import in.buzzzz.domain.user.User;
+
+import java.util.List;
 
 /**
  * Created by ekansh on 25/9/15.
  */
-public class UserInfoDto implements UserData {
+public class UserCommand implements ValidateCommand {
+
 
     private String id;
     private String name;
     private User.Gender gender;
+    private String image;
     private String email;
     private String mobile;
     private String country;
+    private String password;
     private RegistrationMedium medium;
+    private List<InterestData> interests;
+
+    @Override
+    public String toString() {
+        return "UserCommand{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", country='" + country + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean validate() {
+        return true;
+    }
+
 
     public String getId() {
         return id;
@@ -65,11 +91,35 @@ public class UserInfoDto implements UserData {
         this.country = country;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public RegistrationMedium getMedium() {
         return medium;
     }
 
     public void setMedium(RegistrationMedium medium) {
         this.medium = medium;
+    }
+
+    public List<InterestData> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(List<InterestData> interests) {
+        this.interests = interests;
     }
 }

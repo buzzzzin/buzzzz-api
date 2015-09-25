@@ -2,8 +2,33 @@ package in.buzzzz.v1.data.buzz;
 
 import in.buzzzz.data.buzz.BuzzData;
 
-/**
- * Created by ekansh on 25/9/15.
- */
 public class BuzzDto implements BuzzData {
+
+    private String name;
+    private String imageName;
+    private Boolean isRSVP;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public Boolean getIsRSVP() {
+        return isRSVP;
+    }
+
+    public void setIsRSVP(Boolean isRSVP) {
+        this.isRSVP = isRSVP;
+    }
 }

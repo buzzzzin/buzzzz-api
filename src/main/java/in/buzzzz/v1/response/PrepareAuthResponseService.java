@@ -4,22 +4,25 @@ import in.buzzzz.util.messages.SuccessCodes;
 import in.buzzzz.v1.data.response.ResponseDto;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by ekansh on 25/9/15.
- */
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
-public class PrepareAuthResponseService {
+public class PrepareAuthResponseService extends Response{
 
-    public ResponseDto loginResponse(Object data){
+    public ResponseDto loginResponse(Object data, String locale) {
         ResponseDto responseDto = new ResponseDto(data);
-        responseDto.setMessage(SuccessCodes.LOGIN_SUCCESS);
+        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.LOGIN_SUCCESS, null, getLocale(locale)));
         return responseDto;
     }
 
-    public ResponseDto logoutResponse(Object data){
-        ResponseDto responseDto = new ResponseDto(data);
-        responseDto.setMessage(SuccessCodes.LOGOUT_SUCCESS);
+    public ResponseDto logoutResponse(Object data, String locale) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("status",data);
+        ResponseDto responseDto = new ResponseDto(map);
+        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.LOGOUT_SUCCESS, null, getLocale(locale)));
         return responseDto;
     }
+
 
 }
