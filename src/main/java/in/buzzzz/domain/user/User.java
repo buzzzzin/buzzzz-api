@@ -3,38 +3,50 @@ package in.buzzzz.domain.user;
 import in.buzzzz.v1.data.user.UserInfoDto;
 import org.springframework.data.annotation.Id;
 
+import java.util.Date;
+
 /**
  * Created by ekansh on 25/9/15.
  */
 
 public class User {
 
-    public enum Gendre {
+    public enum Gender {
         MALE,
         FEMALE
     }
 
     @Id
     private String id;
+    private Date dateCreated = new Date();
+    private Date lastUpdated = new Date();
     private String name;
-    private Gendre gendre;
+    private Gender gender;
     private String email;
     private String mobile;
     private String country;
     private String password;
+    private RegistrationMedium medium;
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", gendre=" + gendre +
+                ", gendre=" + gender +
                 '}';
     }
 
     public UserInfoDto convertToDto(){
-//        User
-        return null;
+        UserInfoDto infoDto = new UserInfoDto();
+        infoDto.setId(this.id);
+        infoDto.setName(this.name);
+        infoDto.setGender(this.gender);
+        infoDto.setEmail(this.name);
+        infoDto.setMobile(this.name);
+        infoDto.setCountry(this.name);
+        infoDto.setMedium(this.medium);
+        return infoDto;
     }
 
     public String getId() {
@@ -53,12 +65,12 @@ public class User {
         this.name = name;
     }
 
-    public Gendre getGendre() {
-        return gendre;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setGendre(Gendre gendre) {
-        this.gendre = gendre;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String getEmail() {
@@ -91,5 +103,29 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public RegistrationMedium getMedium() {
+        return medium;
+    }
+
+    public void setMedium(RegistrationMedium medium) {
+        this.medium = medium;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

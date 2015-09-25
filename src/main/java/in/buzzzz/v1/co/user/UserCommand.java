@@ -11,7 +11,7 @@ public class UserCommand implements ValidateCommand {
 
     private String id;
     private String name;
-    private User.Gendre gendre;
+    private User.Gender gender;
     private String email;
     private String mobile;
     private String country;

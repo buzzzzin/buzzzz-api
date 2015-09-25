@@ -10,6 +10,7 @@ public class RegistrationMedium {
         GPLUS,
         MANUAL
     }
-//    public
+    private String mediumId;
+    private Medium medium;
 
 }
