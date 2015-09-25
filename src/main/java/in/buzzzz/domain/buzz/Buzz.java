@@ -2,16 +2,36 @@ package in.buzzzz.domain.buzz;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.Date;
+
 public class Buzz {
 
     @Id
     private String id;
     private String name;
     private String imageName;
+    private Date dateCreated;
+    private Date lastUpdated;
     private Boolean isRSVP;
     private BuzzStats stats;
     private Location location;
     private Schedule schedule;
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
 
     public String getId() {
         return id;
