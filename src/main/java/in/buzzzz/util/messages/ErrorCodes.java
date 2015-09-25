@@ -5,5 +5,6 @@ package in.buzzzz.util.messages;
  */
 public final class ErrorCodes {
 
-    public static final String AUTH_EXCEPTION="AUTH_EXCEPTION";
+    public static final String AUTH_EXCEPTION = "AUTH_EXCEPTION";
+    public static final String BUZZ_NOT_CREATE = "BUZZ_NOT_CREATE";
 }

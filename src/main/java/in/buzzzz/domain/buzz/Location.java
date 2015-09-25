@@ -8,6 +8,14 @@ public class Location {
     private String address;
     private String pincode;
 
+    public Location() {
+    }
+
+    public Location(String latitude, String longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public String getCity() {
         return city;
     }

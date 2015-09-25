@@ -1,5 +1,7 @@
 package in.buzzzz.domain.buzz;
 
+import in.buzzzz.v1.co.buzz.BuzzCommand;
+import in.buzzzz.v1.data.buzz.BuzzDto;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
@@ -19,7 +21,6 @@ public class Buzz {
     private Schedule schedule;
     private List<String> tags;
     private List<String> interests;
-    private String userId;
     private String email;
 
     @Override
@@ -30,12 +31,26 @@ public class Buzz {
                 '}';
     }
 
-    public String getUserId() {
-        return userId;
+    public Buzz(BuzzCommand buzzCommand) {
+        this.name = buzzCommand.getName();
+        this.imageName = buzzCommand.getImageName();
+        this.dateCreated = new Date();
+        this.lastUpdated = new Date();
+        this.isRSVP = buzzCommand.getIsRSVP();
+        this.location = new Location(buzzCommand.getLatitude(), buzzCommand.getLongitude());
+        this.schedule = new Schedule();
+        this.tags = buzzCommand.getTags();
+        this.interests = buzzCommand.getInterests();
+        this.email = buzzCommand.getAuthEmail();
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+
+    public BuzzDto convertToDto() {
+        BuzzDto buzzDto = new BuzzDto();
+        buzzDto.setName(this.name);
+        buzzDto.setImageName(this.imageName);
+        buzzDto.setIsRSVP(this.isRSVP);
+        return buzzDto;
     }
 
     public String getEmail() {
