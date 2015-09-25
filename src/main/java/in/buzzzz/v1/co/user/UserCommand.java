@@ -18,6 +18,19 @@ public class UserCommand implements ValidateCommand {
     private String password;
 
     @Override
+    public String toString() {
+        return "UserCommand{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", country='" + country + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean validate() {
         return true;
     }
