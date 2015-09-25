@@ -5,4 +5,7 @@ package in.buzzzz.domain.mapping;
  */
 public class UserBuzzMapping {
 
+
+
+
 }

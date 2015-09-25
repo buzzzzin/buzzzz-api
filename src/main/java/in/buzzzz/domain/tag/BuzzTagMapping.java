@@ -6,6 +6,7 @@ public class BuzzTagMapping {
     private Long buzzId;
     private String buzzName;
     private String tag;
+
     public Long getId() {
         return id;
     }
@@ -37,6 +38,4 @@ public class BuzzTagMapping {
     public void setTag(String tag) {
         this.tag = tag;
     }
-
-
 }
