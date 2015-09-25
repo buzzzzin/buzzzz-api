@@ -11,6 +11,27 @@ public class RegistrationMedium {
         MANUAL
     }
     private String mediumId;
-    private Medium medium;
+    private Medium mediumType;
 
+    public RegistrationMedium(){}
+    public RegistrationMedium(String mediumId, Medium mediumType){
+        this.mediumId =mediumId;
+        this.mediumType=mediumType;
+    }
+
+    public String getMediumId() {
+        return mediumId;
+    }
+
+    public void setMediumId(String mediumId) {
+        this.mediumId = mediumId;
+    }
+
+    public Medium getMediumType() {
+        return mediumType;
+    }
+
+    public void setMediumType(Medium mediumType) {
+        this.mediumType = mediumType;
+    }
 }

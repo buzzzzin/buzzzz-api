@@ -21,7 +21,8 @@ public class UserCommand implements ValidateCommand {
     private String mobile;
     private String country;
     private String password;
-    private RegistrationMedium medium;
+    private String mediumId;
+    private RegistrationMedium.Medium medium;
     private List<InterestData> interests;
 
     @Override
@@ -107,11 +108,19 @@ public class UserCommand implements ValidateCommand {
         this.image = image;
     }
 
-    public RegistrationMedium getMedium() {
+    public String getMediumId() {
+        return mediumId;
+    }
+
+    public void setMediumId(String mediumId) {
+        this.mediumId = mediumId;
+    }
+
+    public RegistrationMedium.Medium getMedium() {
         return medium;
     }
 
-    public void setMedium(RegistrationMedium medium) {
+    public void setMedium(RegistrationMedium.Medium medium) {
         this.medium = medium;
     }
 

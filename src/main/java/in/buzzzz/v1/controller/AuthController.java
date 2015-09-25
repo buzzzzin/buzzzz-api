@@ -25,7 +25,11 @@ public class AuthController {
     public ResponseDto login(@RequestBody UserCommand userCommand,
                              @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         System.out.println(userCommand.toString());
-        return prepareAuthResponseService.loginResponse(authenticationService.login(userCommand), locale);
+        try{
+        return prepareAuthResponseService.loginResponse(authenticationService.login(userCommand), locale);}catch (Exception e){
+            e.printStackTrace(System.out);
+        }
+        return  null;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
