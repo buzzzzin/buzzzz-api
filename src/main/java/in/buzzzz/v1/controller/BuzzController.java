@@ -24,9 +24,16 @@ public class BuzzController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseDto save(@RequestBody(required = false) BuzzCommand buzz,
-                             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) throws ParseException {
+                            @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) throws ParseException {
         System.out.println(buzz.toString());
         return prepareBuzzResponseService.createBuzzResponse(buzzService.save(buzz), locale);
+    }
+
+    @RequestMapping(value = "/preview/{id}", method = RequestMethod.GET)
+    public ResponseDto preview(@PathVariable("id") String buzzId,
+                               @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) throws ParseException {
+        System.out.println(buzzId);
+        return prepareBuzzResponseService.createBuzzResponse(buzzService.preview(buzzId), locale);
     }
 
     @ExceptionHandler(GenericException.class)

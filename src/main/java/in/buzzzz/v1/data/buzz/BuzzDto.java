@@ -4,9 +4,18 @@ import in.buzzzz.data.buzz.BuzzData;
 
 public class BuzzDto implements BuzzData {
 
+    private String buzzId;
     private String name;
     private String imageName;
     private Boolean isRSVP;
+
+    public String getBuzzId() {
+        return buzzId;
+    }
+
+    public void setBuzzId(String buzzId) {
+        this.buzzId = buzzId;
+    }
 
     public String getName() {
         return name;

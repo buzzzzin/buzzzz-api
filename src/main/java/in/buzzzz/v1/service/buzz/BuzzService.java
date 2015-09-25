@@ -4,6 +4,7 @@ import in.buzzzz.domain.buzz.Buzz;
 import in.buzzzz.repository.buzz.BuzzRepository;
 import in.buzzzz.util.exceptions.GenericException;
 import in.buzzzz.util.exceptions.buzz.BuzzNotCreateException;
+import in.buzzzz.util.exceptions.buzz.BuzzNotFoundException;
 import in.buzzzz.v1.co.buzz.BuzzCommand;
 import in.buzzzz.v1.data.buzz.BuzzDto;
 import in.buzzzz.v1.service.tag.TagService;
@@ -26,6 +27,17 @@ public class BuzzService {
             buzzRepository.save(buzz);
             //TODO need to apply rabbit MQ call here
             tagService.createOrUpdateTags(buzzCommand.getTags());
+            return buzz.convertToDto();
+        }
+        throw new BuzzNotCreateException();
+    }
+
+    public BuzzDto preview(String buzzId) throws GenericException {
+        if (buzzId != null) {
+            Buzz buzz = buzzRepository.findById(buzzId);
+            if (buzz == null) {
+                throw new BuzzNotFoundException();
+            }
             return buzz.convertToDto();
         }
         throw new BuzzNotCreateException();
