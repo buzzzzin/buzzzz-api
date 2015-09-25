@@ -1,10 +1,6 @@
 package in.buzzzz.v1.service.user;
 
-import in.buzzzz.domain.user.User;
-import in.buzzzz.repository.user.UserRepository;
-import in.buzzzz.v1.co.user.UserCommand;
-import in.buzzzz.v1.data.login.LoginDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import in.buzzzz.v1.data.user.UserInfoDto;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,5 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+    public UserInfoDto getMyProfile(){
+
+        return null;
+    }
+
+    public UserInfoDto getOthersProfile(){
+
+        return null;
+    }
 
 }
