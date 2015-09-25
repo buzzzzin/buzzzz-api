@@ -1,6 +1,7 @@
 package in.buzzzz.domain.user;
 
 import in.buzzzz.data.interest.InterestData;
+import in.buzzzz.v1.co.user.UserCommand;
 import in.buzzzz.v1.data.user.UserInfoDto;
 import org.springframework.data.annotation.Id;
 
@@ -30,7 +31,20 @@ public class User {
     private String country;
     private String password;
     private RegistrationMedium medium;
-    private List<InterestData> interestData;
+    private List<InterestData> interests;
+
+    public User(){}
+    public User(UserCommand userCommand){
+        this.id= userCommand.getId();
+        this.name = userCommand.getName();
+        this.image = userCommand.getImage();
+        this.gender = userCommand.getGender();
+        this.email = userCommand.getEmail();
+        this.mobile = userCommand.getMobile();
+        this.country = userCommand.getCountry();
+        this.medium = userCommand.getMedium();
+        this.interests = userCommand.getInterests();
+    }
 
     @Override
     public String toString() {
@@ -141,12 +155,13 @@ public class User {
         this.image = image;
     }
 
-    public List<InterestData> getInterestData() {
-        return interestData;
+    public List<InterestData> getInterests() {
+        return interests;
     }
 
-    public void setInterestData(List<InterestData> interestData) {
-        this.interestData = interestData;
+    public void setInterests(List<InterestData> interests) {
+        this.interests = interests;
     }
+
 
 }
