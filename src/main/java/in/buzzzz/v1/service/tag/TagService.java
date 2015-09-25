@@ -7,6 +7,8 @@ import in.buzzzz.util.exceptions.buzz.BuzzNotCreateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TagService {
 
@@ -20,5 +22,17 @@ public class TagService {
             return null;
         }
         throw new BuzzNotCreateException();
+    }
+
+    public void createOrUpdateTags(List<String> tags) {
+        for (String tag : tags) {
+            Tag tagInstance = tagRepository.findByTag(tag);
+            if (tagInstance == null) {
+                save(tag);
+            } else {
+                tagInstance.setUsedCount(tagInstance.getUsedCount() + 1);
+                tagRepository.save(tagInstance);
+            }
+        }
     }
 }
