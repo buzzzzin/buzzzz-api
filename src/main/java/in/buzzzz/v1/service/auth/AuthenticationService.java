@@ -30,7 +30,7 @@ public class AuthenticationService {
         }
         else{
             loginDto.setUser(user.convertToDto());
-            loginDto.setHasInterests(user.getInterests().size()!=0);
+            loginDto.setHasInterests(user.getInterests()!=null?user.getInterests().size()!=0:false);
         }
         UserAuthMapping userAuthMapping = userAuthMappingRepository.findByEmail(user.getEmail());
         if(userAuthMapping==null){
