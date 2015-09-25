@@ -33,6 +33,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.springframework.boot:spring-boot-starter-mail")
+    compile("org.springframework.boot:spring-boot-starter-websocket")
+    compile("org.springframework:spring-messaging")
 //    compile("com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.6.1")
     testCompile("org.springframework.boot:spring-boot-starter-test") 
 }
