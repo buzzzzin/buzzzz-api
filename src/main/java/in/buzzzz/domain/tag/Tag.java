@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Tag {
 
-    private Long id;
+    private String id;
     private String tag;
     private Long usedCount;
     private Date dateCreated;
@@ -13,8 +13,11 @@ public class Tag {
     @Override
     public String toString() {
         return "Tag{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", tag='" + tag + '\'' +
+                ", usedCount=" + usedCount +
+                ", dateCreated=" + dateCreated +
+                ", lastUpdated=" + lastUpdated +
                 '}';
     }
 
@@ -42,11 +45,11 @@ public class Tag {
         this.lastUpdated = lastUpdated;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
