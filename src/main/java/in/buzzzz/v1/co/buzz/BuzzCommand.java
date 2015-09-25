@@ -24,7 +24,23 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
 
     @Override
     public boolean validate() {
-        return true;
+        Boolean result = true;
+        if (this.name == null || this.name.equals("")) {
+            result = false;
+        }
+        if (this.startTime == null || this.startTime.equals("")) {
+            result = false;
+        }
+        if (this.period == null) {
+            result = false;
+        }
+        if (this.latitude == null || this.latitude.equals("")) {
+            result = false;
+        }
+        if (this.longitude == null || this.longitude.equals("")) {
+            result = false;
+        }
+        return result;
     }
 
     @Override
