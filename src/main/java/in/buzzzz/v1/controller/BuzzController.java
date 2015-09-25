@@ -21,7 +21,7 @@ public class BuzzController {
     private BuzzService buzzService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ResponseDto login(@RequestBody BuzzCommand buzz,
+    public ResponseDto save(@RequestBody BuzzCommand buzz,
                              @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         System.out.println(buzz.toString());
         return prepareBuzzResponseService.createBuzzResponse(buzzService.save(buzz), locale);
