@@ -7,7 +7,7 @@ public class Payload {
     private String command;
     private String destination;
     private String action;
-    private String message;
+    private Object data;
     private String token;
 
     public String getCommand() {
@@ -34,12 +34,12 @@ public class Payload {
         this.action = action;
     }
 
-    public String getMessage() {
-        return message;
+    public Object getData() {
+        return data;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public String getToken() {
