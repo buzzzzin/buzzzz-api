@@ -1,7 +1,5 @@
 package in.buzzzz.domain.interest;
 
-import in.buzzzz.data.interest.InterestData;
-import in.buzzzz.v1.data.interest.InterestDto;
 import in.buzzzz.v1.data.interest.InterestDto;
 import org.springframework.data.annotation.Id;
 
@@ -23,7 +21,8 @@ public class Interest {
                 '}';
     }
 
-    public InterestData convertToDto(){
+
+    public InterestDto convertToDto(){
         InterestDto interestDto = new InterestDto();
         interestDto.setId(this.id);
         interestDto.setName(this.name);
