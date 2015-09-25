@@ -1,0 +1,48 @@
+package in.buzzzz.v1.service.auth;
+
+import in.buzzzz.domain.mapping.UserAuthMapping;
+import in.buzzzz.domain.user.User;
+import in.buzzzz.repository.mapping.UserAuthMappingRepository;
+import in.buzzzz.repository.user.UserRepository;
+import in.buzzzz.v1.co.user.UserCommand;
+import in.buzzzz.v1.data.login.LoginDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+/**
+ * Created by ekansh on 26/9/15.
+ */
+@Service
+public class AuthenticationService {
+
+    @Autowired private UserRepository userRepository;
+    @Autowired private UserAuthMappingRepository userAuthMappingRepository;
+
+    public LoginDto login(UserCommand userCommand){
+        User user = userRepository.findByEmail(userCommand.getEmail());
+        LoginDto loginDto = new LoginDto();
+        if(user==null){
+            loginDto.setUser(userRepository.save(user).convertToDto());
+            loginDto.setHasInterests(false);
+        }
+        else{
+            loginDto.setUser(user.convertToDto());
+            loginDto.setHasInterests(user.getInterestData().size()!=0);
+        }
+        UserAuthMapping userAuthMapping = userAuthMappingRepository.findByEmail(user.getEmail());
+        if(userAuthMapping==null){
+            userAuthMapping = new UserAuthMapping();
+            userAuthMapping.setAuthToken((new Date()).hashCode()+""+user.getEmail().hashCode());
+            userAuthMapping.setEmail(user.getEmail());
+            userAuthMappingRepository.save(userAuthMapping);
+        }
+        loginDto.setAuthToken("token");
+        return loginDto;
+    }
+
+    private void authManage(){
+
+    }
+}

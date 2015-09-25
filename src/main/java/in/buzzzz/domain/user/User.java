@@ -1,9 +1,11 @@
 package in.buzzzz.domain.user;
 
+import in.buzzzz.data.interest.InterestData;
 import in.buzzzz.v1.data.user.UserInfoDto;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by ekansh on 25/9/15.
@@ -28,6 +30,7 @@ public class User {
     private String country;
     private String password;
     private RegistrationMedium medium;
+    private List<InterestData> interestData;
 
     @Override
     public String toString() {
@@ -38,7 +41,7 @@ public class User {
                 '}';
     }
 
-    public UserInfoDto convertToDto(){
+    public UserInfoDto convertToDto() {
         UserInfoDto infoDto = new UserInfoDto();
         infoDto.setId(this.id);
         infoDto.setName(this.name);
@@ -137,4 +140,13 @@ public class User {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public List<InterestData> getInterestData() {
+        return interestData;
+    }
+
+    public void setInterestData(List<InterestData> interestData) {
+        this.interestData = interestData;
+    }
+
 }
