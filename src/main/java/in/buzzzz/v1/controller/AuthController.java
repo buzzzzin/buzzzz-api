@@ -30,8 +30,9 @@ public class AuthController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public ResponseDto logout(
+            @RequestHeader(value = "X-Auth-Token", required = true) String authToken,
             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
-        return prepareAuthResponseService.logoutResponse(null, locale);
+        return prepareAuthResponseService.logoutResponse(authenticationService.logout(authToken), locale);
     }
 
     @ExceptionHandler(GenericException.class)
