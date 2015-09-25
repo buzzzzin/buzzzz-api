@@ -1,6 +1,7 @@
 package in.buzzzz.config.websocket;
 
 import in.buzzzz.messaging.BuzzWebSocketHandler;
+import in.buzzzz.messaging.PayloadHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;
@@ -25,11 +26,25 @@ public class WebSocketConfig implements WebSocketConfigurer {
     public WebSocketHandler webSocketHandler() {
         BuzzWebSocketHandler buzzWebSocketHandler = new BuzzWebSocketHandler();
         buzzWebSocketHandler.setSocketContextHolder(socketContextHolder());
+        buzzWebSocketHandler.setPayloadHandler(payloadHandler());
         return buzzWebSocketHandler;
+    }
+
+    public PayloadHandler payloadHandler() {
+        PayloadHandler payloadHandler = new PayloadHandler();
+        payloadHandler.setChannelContextHolder(channelContextHolder());
+        payloadHandler.setWebSocketContextHolder(socketContextHolder());
+        return payloadHandler;
     }
 
     @Bean
     public WebSocketContextHolder socketContextHolder() {
         return new WebSocketContextHolder();
+    }
+
+    @Bean
+    public ChannelContextHolder channelContextHolder() {
+        ChannelContextHolder channelContextHolder = new ChannelContextHolder();
+        return channelContextHolder;
     }
 }

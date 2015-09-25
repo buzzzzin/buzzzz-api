@@ -27,4 +27,8 @@ public class WebSocketContextHolder {
     public void removeWebSocketSession(WebSocketSession session) {
         sessionContext.remove(session.getId());
     }
+
+    public WebSocketSession getWebSocketSession(String sessionId) {
+        return sessionContext.get(sessionId);
+    }
 }
