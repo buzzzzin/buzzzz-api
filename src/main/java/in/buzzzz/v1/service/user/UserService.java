@@ -2,7 +2,6 @@ package in.buzzzz.v1.service.user;
 
 import in.buzzzz.domain.user.User;
 import in.buzzzz.repository.user.UserRepository;
-import in.buzzzz.util.exceptions.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +14,14 @@ public class UserService {
     @Autowired private UserRepository userRepository;
 
     public User save(User user){
-        if(user.validate())
-            return userRepository.save(user);
-        throw new AuthenticationException();
+
+        if(userRepository.countByEmail(user.getEmail())==0){
+            user =  userRepository.save(user);
+            return  user;
+        }
+        else{
+            return user;
+        }
     }
 
 }

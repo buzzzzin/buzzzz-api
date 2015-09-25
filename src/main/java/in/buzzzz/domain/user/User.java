@@ -1,5 +1,6 @@
 package in.buzzzz.domain.user;
 
+import in.buzzzz.v1.data.user.UserInfoDto;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -31,8 +32,9 @@ public class User {
                 '}';
     }
 
-    public boolean validate(){
-        return true;
+    public UserInfoDto convertToDto(){
+//        User
+        return null;
     }
 
     public String getId() {

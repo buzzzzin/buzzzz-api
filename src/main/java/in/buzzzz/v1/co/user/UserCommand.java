@@ -1,12 +1,13 @@
-package in.buzzzz.v1.data.user;
+package in.buzzzz.v1.co.user;
 
-import in.buzzzz.data.user.UserData;
+import in.buzzzz.co.ValidateCommand;
 import in.buzzzz.domain.user.User;
 
 /**
  * Created by ekansh on 25/9/15.
  */
-public class UserInfoDto implements UserData {
+public class UserCommand implements ValidateCommand {
+
 
     private String id;
     private String name;
@@ -16,5 +17,8 @@ public class UserInfoDto implements UserData {
     private String country;
     private String password;
 
-
+    @Override
+    public boolean validate() {
+        return true;
+    }
 }
