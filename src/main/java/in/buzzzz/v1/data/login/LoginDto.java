@@ -9,6 +9,7 @@ public class LoginDto {
 
     private UserInfoDto user;
     private boolean hasInterests;
+    private String authToken;
 
     public UserInfoDto getUser() {
         return user;
@@ -24,5 +25,13 @@ public class LoginDto {
 
     public void setHasInterests(boolean hasInterests) {
         this.hasInterests = hasInterests;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }
