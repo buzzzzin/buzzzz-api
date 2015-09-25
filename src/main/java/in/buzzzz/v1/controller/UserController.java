@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/v1/user")
 public class UserController {
 
-    @RequestMapping("/list")
-    public ResponseDto list(){
+    @RequestMapping("/profile")
+    public ResponseDto profile(){
         return null;
     }
 

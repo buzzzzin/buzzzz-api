@@ -16,7 +16,8 @@ public class User {
 
     public enum Gender {
         MALE,
-        FEMALE
+        FEMALE,
+        NOT_SET
     }
 
     @Id
@@ -38,7 +39,7 @@ public class User {
         this.id= userCommand.getId();
         this.name = userCommand.getName();
         this.image = userCommand.getImage();
-        this.gender = userCommand.getGender();
+        this.gender = userCommand.getGender()!=null?userCommand.getGender():Gender.NOT_SET;
         this.email = userCommand.getEmail();
         this.mobile = userCommand.getMobile();
         this.country = userCommand.getCountry();
