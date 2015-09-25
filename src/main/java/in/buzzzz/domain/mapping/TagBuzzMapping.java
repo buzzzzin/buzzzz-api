@@ -1,25 +1,25 @@
-package in.buzzzz.domain.tag;
+package in.buzzzz.domain.mapping;
 
-public class BuzzTagMapping {
+public class TagBuzzMapping {
 
-    private Long id;
-    private Long buzzId;
+    private String id;
+    private String buzzId;
     private String buzzName;
     private String tag;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getBuzzId() {
+    public String getBuzzId() {
         return buzzId;
     }
 
-    public void setBuzzId(Long buzzId) {
+    public void setBuzzId(String buzzId) {
         this.buzzId = buzzId;
     }
 
