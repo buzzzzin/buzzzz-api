@@ -3,6 +3,7 @@ package in.buzzzz.domain.buzz;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
+import java.util.List;
 
 public class Buzz {
 
@@ -16,6 +17,24 @@ public class Buzz {
     private BuzzStats stats;
     private Location location;
     private Schedule schedule;
+    private List<String> tags;
+    private List<String> interests;
+
+    public List<String> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(List<String> interests) {
+        this.interests = interests;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
 
     public Date getDateCreated() {
         return dateCreated;
