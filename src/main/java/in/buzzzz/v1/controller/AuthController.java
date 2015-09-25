@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @ExceptionHandler(GenericException.class)
-    private ResponseDto catchException(){
+    private ResponseDto catchException(GenericException e){
         return prepareErrorResponseService.catchException(e);
     }
 
