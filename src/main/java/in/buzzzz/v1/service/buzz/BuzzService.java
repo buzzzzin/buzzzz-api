@@ -17,6 +17,7 @@ public class BuzzService {
 
     @Autowired
     private BuzzRepository buzzRepository;
+    @Autowired
     private TagService tagService;
 
     public BuzzDto save(BuzzCommand buzzCommand) throws GenericException, ParseException {
