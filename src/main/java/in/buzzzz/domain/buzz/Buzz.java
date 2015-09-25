@@ -20,6 +20,14 @@ public class Buzz {
     private List<String> tags;
     private List<String> interests;
 
+    @Override
+    public String toString() {
+        return "Buzz{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public List<String> getInterests() {
         return interests;
     }
