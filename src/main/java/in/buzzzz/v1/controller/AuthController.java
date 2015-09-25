@@ -35,7 +35,7 @@ public class AuthController {
 
     @ExceptionHandler(GenericException.class)
     private ResponseDto catchException(GenericException e) {
-        return prepareErrorResponseService.catchException(e);
+        return prepareErrorResponseService.catchException(e, null);
     }
 
 
