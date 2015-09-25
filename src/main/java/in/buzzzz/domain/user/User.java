@@ -56,7 +56,7 @@ public class User {
                 '}';
     }
 
-    public UserInfoDto convertToDto() {
+    public UserInfoDto convertToUserInfoDto() {
         UserInfoDto infoDto = new UserInfoDto();
         infoDto.setId(this.id);
         infoDto.setName(this.name!=null?this.name:"");

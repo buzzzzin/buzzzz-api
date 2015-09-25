@@ -25,11 +25,11 @@ public class AuthenticationService {
         LoginDto loginDto = new LoginDto();
         if(user==null){
             user = userRepository.save(new User(userCommand));
-            loginDto.setUser(user.convertToDto());
+            loginDto.setUser(user.convertToUserInfoDto());
             loginDto.setHasInterests(false);
         }
         else{
-            loginDto.setUser(user.convertToDto());
+            loginDto.setUser(user.convertToUserInfoDto());
             loginDto.setHasInterests(user.getInterests()!=null?user.getInterests().size()!=0:false);
         }
         UserAuthMapping userAuthMapping = userAuthMappingRepository.findByEmail(user.getEmail());
