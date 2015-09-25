@@ -21,6 +21,7 @@ public class User {
     private Date dateCreated = new Date();
     private Date lastUpdated = new Date();
     private String name;
+    private String image;
     private Gender gender;
     private String email;
     private String mobile;
@@ -127,5 +128,13 @@ public class User {
 
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

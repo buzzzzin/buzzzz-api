@@ -2,7 +2,7 @@ package in.buzzzz.v1.service.user;
 
 import in.buzzzz.domain.user.User;
 import in.buzzzz.repository.user.UserRepository;
-import in.buzzzz.v1.data.user.UserInfoDto;
+import in.buzzzz.v1.data.login.LoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +14,12 @@ public class UserService {
 
     @Autowired private UserRepository userRepository;
 
-    public UserInfoDto save(User user){
+    public LoginDto login(User user){
         if(userRepository.countByEmail(user.getEmail())==0){
-            user =  userRepository.save(user);
-            return  user.convertToDto();
+            LoginDto loginDto = new LoginDto();
+            loginDto.setUser(userRepository.save(user).convertToDto());
+            loginDto.setHasInterests(false);
+            return loginDto;
         }
         else{
             return null;

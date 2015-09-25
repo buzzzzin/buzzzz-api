@@ -8,5 +8,21 @@ import in.buzzzz.v1.data.user.UserInfoDto;
 public class LoginDto {
 
     private UserInfoDto user;
-//    private 
+    private boolean hasInterests;
+
+    public UserInfoDto getUser() {
+        return user;
+    }
+
+    public void setUser(UserInfoDto user) {
+        this.user = user;
+    }
+
+    public boolean isHasInterests() {
+        return hasInterests;
+    }
+
+    public void setHasInterests(boolean hasInterests) {
+        this.hasInterests = hasInterests;
+    }
 }
