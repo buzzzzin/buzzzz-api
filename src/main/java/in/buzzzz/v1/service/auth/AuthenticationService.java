@@ -46,9 +46,7 @@ public class AuthenticationService {
     public boolean logout(String authToken){
         UserAuthMapping userAuthMapping = userAuthMappingRepository.findByAuthToken(authToken);
         userAuthMapping.setAuthToken(null);
-        userAuthMappingRepository.save(userAuthMapping);
-
-
-        return false;
+        userAuthMapping = userAuthMappingRepository.save(userAuthMapping);
+        return userAuthMapping!=null;
     }
 }
