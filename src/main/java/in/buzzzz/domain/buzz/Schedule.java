@@ -1,5 +1,9 @@
 package in.buzzzz.domain.buzz;
 
+import in.buzzzz.util.constants.BuzzConstants;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Schedule {
@@ -17,6 +21,15 @@ public class Schedule {
     private Date startTime;
     private Date endTime;
     private Period period;
+
+    public Schedule() {
+    }
+
+    public Schedule(String startTime, String endTime, Period period) throws ParseException {
+        this.startTime = new SimpleDateFormat(BuzzConstants.dateFormat).parse(startTime);
+        this.endTime = new SimpleDateFormat(BuzzConstants.dateFormat).parse(endTime);
+        this.period = period;
+    }
 
     public Period getPeriod() {
         return period;

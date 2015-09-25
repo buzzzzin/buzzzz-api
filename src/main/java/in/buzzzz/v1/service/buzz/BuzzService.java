@@ -9,13 +9,15 @@ import in.buzzzz.v1.data.buzz.BuzzDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+
 @Service
 public class BuzzService {
 
     @Autowired
     private BuzzRepository buzzRepository;
 
-    public BuzzDto save(BuzzCommand buzzCommand) throws GenericException {
+    public BuzzDto save(BuzzCommand buzzCommand) throws GenericException, ParseException {
         if (buzzCommand.validate()) {
             Buzz buzz = new Buzz(buzzCommand);
             buzzRepository.save(buzz);
