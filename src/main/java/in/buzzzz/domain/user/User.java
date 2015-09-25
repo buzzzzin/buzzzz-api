@@ -45,7 +45,7 @@ public class User {
         this.email = userCommand.getEmail();
         this.mobile = userCommand.getMobile();
         this.country = userCommand.getCountry();
-        this.medium = new RegistrationMedium();
+        this.medium = new RegistrationMedium(userCommand.getMediumId(),userCommand.getMediumType());
         this.interests = userCommand.getInterests();
     }
 

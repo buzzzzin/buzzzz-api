@@ -22,7 +22,7 @@ public class UserCommand implements ValidateCommand {
     private String country;
     private String password;
     private String mediumId;
-    private RegistrationMedium.Medium medium;
+    private RegistrationMedium.Medium mediumType;
     private List<InterestData> interests;
 
     @Override
@@ -116,12 +116,12 @@ public class UserCommand implements ValidateCommand {
         this.mediumId = mediumId;
     }
 
-    public RegistrationMedium.Medium getMedium() {
-        return medium;
+    public RegistrationMedium.Medium getMediumType() {
+        return mediumType;
     }
 
-    public void setMedium(RegistrationMedium.Medium medium) {
-        this.medium = medium;
+    public void setMediumType(RegistrationMedium.Medium mediumType) {
+        this.mediumType = mediumType;
     }
 
     public List<InterestData> getInterests() {
