@@ -1,4 +1,4 @@
-package in.buzzzz.co.buzz;
+package in.buzzzz.v1.co.buzz;
 
 /**
  * Created by ekansh on 25/9/15.

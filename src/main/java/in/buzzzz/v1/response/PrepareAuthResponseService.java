@@ -22,4 +22,5 @@ public class PrepareAuthResponseService {
         return responseDto;
     }
 
+
 }

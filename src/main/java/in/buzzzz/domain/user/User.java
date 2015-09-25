@@ -31,6 +31,10 @@ public class User {
                 '}';
     }
 
+    public boolean validate(){
+        return true;
+    }
+
     public String getId() {
         return id;
     }
