@@ -1,4 +1,4 @@
-package in.buzzzz.v1.services.response;
+package in.buzzzz.v1.response;
 
 import in.buzzzz.util.messages.SuccessCodes;
 import in.buzzzz.v1.data.response.ResponseDto;

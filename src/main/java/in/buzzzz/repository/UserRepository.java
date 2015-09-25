@@ -1,11 +1,11 @@
 package in.buzzzz.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import in.buzzzz.domain.user.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  * Created by ekansh on 25/9/15.
  */
-@Repository
-public interface UserRepository extends CrudRepository {
+
+public interface UserRepository extends MongoRepository<User,Long> {
 }
