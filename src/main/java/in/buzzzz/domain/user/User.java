@@ -58,11 +58,11 @@ public class User {
     public UserInfoDto convertToDto() {
         UserInfoDto infoDto = new UserInfoDto();
         infoDto.setId(this.id);
-        infoDto.setName(this.name);
+        infoDto.setName(this.name!=null?this.name:"");
         infoDto.setGender(this.gender);
-        infoDto.setEmail(this.name);
-        infoDto.setMobile(this.name);
-        infoDto.setCountry(this.name);
+        infoDto.setEmail(this.email);
+        infoDto.setMobile(this.mobile!=null?this.mobile:"");
+        infoDto.setCountry(this.country!=null?this.country:"");
         infoDto.setMedium(this.medium);
         return infoDto;
     }
