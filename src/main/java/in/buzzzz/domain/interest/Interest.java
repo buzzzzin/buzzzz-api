@@ -1,5 +1,6 @@
 package in.buzzzz.domain.interest;
 
+import in.buzzzz.v1.data.interest.InterestDto;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
@@ -10,6 +11,13 @@ public class Interest {
     private String id;
     private String name;
     private Date dateCreated;
+
+    public InterestDto convertToDto() {
+        InterestDto infoDto = new InterestDto();
+        infoDto.setId(this.id);
+        infoDto.setName(this.name);
+        return infoDto;
+    }
 
     public String getId() {
         return id;
