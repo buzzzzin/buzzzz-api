@@ -19,6 +19,16 @@ public class Buzz {
     private Schedule schedule;
     private List<String> tags;
     private List<String> interests;
+    private String userId;
+    private String email;
+
+    @Override
+    public String toString() {
+        return "Buzz{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 
     public List<String> getInterests() {
         return interests;
