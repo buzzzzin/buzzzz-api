@@ -1,5 +1,10 @@
 package in.buzzzz.domain.rsvp;
 
+import in.buzzzz.data.rsvp.RSVPData;
+import in.buzzzz.v1.co.rsvp.RSVPCommand;
+import in.buzzzz.v1.data.rsvp.RSVPDto;
+import org.springframework.data.annotation.Id;
+
 public class RSVP {
 
     public enum RSVPStatus {
@@ -8,16 +13,31 @@ public class RSVP {
         MAY_BE
     }
 
-    private String userId;
+    @Id
+    private String id;
+    private String email;
     private String buzzId;
     private RSVPStatus status;
 
-    public String getUserId() {
-        return userId;
+    public RSVP() {
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public RSVP(RSVPCommand rsvpCommand) {
+        this.email = rsvpCommand.getAuthEmail();
+        this.buzzId = rsvpCommand.getBuzzId();
+        this.status = rsvpCommand.getStatus();
+    }
+
+    public RSVPData convertToDto() {
+       return null;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getBuzzId() {

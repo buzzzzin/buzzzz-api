@@ -2,20 +2,24 @@ package in.buzzzz.v1.data.response;
 
 import in.buzzzz.data.response.ResponseData;
 
-/**
- * Created by ekansh on 25/9/15.
- */
 public class ResponseDto implements ResponseData {
 
     private String message;
     private Object data;
     private Integer status = 1;
 
-    public ResponseDto(){}
-    public ResponseDto(Object data){
-        this.data = data;
+    public ResponseDto() {
     }
-    public ResponseDto(Object data,String message){
+
+    public ResponseDto(Object data) {
+        if (data != null) {
+            this.data = data;
+        } else {
+            this.data = "";
+        }
+    }
+
+    public ResponseDto(Object data, String message) {
         this.data = data;
         this.message = message;
     }

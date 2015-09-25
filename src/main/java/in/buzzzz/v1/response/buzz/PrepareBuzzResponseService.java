@@ -13,4 +13,16 @@ public class PrepareBuzzResponseService extends Response {
         responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.BUZZ_CREATE_SUCCESS, null, getLocale(locale)));
         return responseDto;
     }
+
+    public ResponseDto createBuzzPrevireResponse(Object data, String locale) {
+        ResponseDto responseDto = new ResponseDto(data);
+        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.BUZZ_PREVIEW_SUCCESS, null, getLocale(locale)));
+        return responseDto;
+    }
+
+    public ResponseDto createRSVPResponse(Object data, String locale) {
+        ResponseDto responseDto = new ResponseDto(data);
+        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.RSVP_SUCCESS, null, getLocale(locale)));
+        return responseDto;
+    }
 }

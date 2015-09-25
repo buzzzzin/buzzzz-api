@@ -2,6 +2,7 @@ package in.buzzzz.v1.controller;
 
 import in.buzzzz.util.exceptions.GenericException;
 import in.buzzzz.v1.co.buzz.BuzzCommand;
+import in.buzzzz.v1.co.rsvp.RSVPCommand;
 import in.buzzzz.v1.data.response.ResponseDto;
 import in.buzzzz.v1.response.PrepareErrorResponseService;
 import in.buzzzz.v1.response.buzz.PrepareBuzzResponseService;
@@ -31,9 +32,16 @@ public class BuzzController {
 
     @RequestMapping(value = "/preview/{id}", method = RequestMethod.GET)
     public ResponseDto preview(@PathVariable("id") String buzzId,
-                               @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) throws ParseException {
+                               @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         System.out.println(buzzId);
-        return prepareBuzzResponseService.createBuzzResponse(buzzService.preview(buzzId), locale);
+        return prepareBuzzResponseService.createBuzzPrevireResponse(buzzService.preview(buzzId), locale);
+    }
+
+    @RequestMapping(value = "/rsvp", method = RequestMethod.POST)
+    public ResponseDto rsvp(@RequestBody(required = false) RSVPCommand rsvpCommand,
+                            @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
+        System.out.println(rsvpCommand.toString());
+        return prepareBuzzResponseService.createRSVPResponse(buzzService.rsvp(rsvpCommand), locale);
     }
 
     @ExceptionHandler(GenericException.class)
