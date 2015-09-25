@@ -14,7 +14,6 @@ public class UserInfoDto implements UserData {
     private String email;
     private String mobile;
     private String country;
-    private String password;
 
 
 }
