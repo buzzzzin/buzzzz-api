@@ -4,6 +4,7 @@ import in.buzzzz.v1.co.buzz.BuzzCommand;
 import in.buzzzz.v1.data.buzz.BuzzDto;
 import org.springframework.data.annotation.Id;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -31,14 +32,14 @@ public class Buzz {
                 '}';
     }
 
-    public Buzz(BuzzCommand buzzCommand) {
+    public Buzz(BuzzCommand buzzCommand) throws ParseException {
         this.name = buzzCommand.getName();
         this.imageName = buzzCommand.getImageName();
         this.dateCreated = new Date();
         this.lastUpdated = new Date();
         this.isRSVP = buzzCommand.getIsRSVP();
         this.location = new Location(buzzCommand.getLatitude(), buzzCommand.getLongitude());
-        this.schedule = new Schedule();
+        this.schedule = new Schedule(buzzCommand.getStartTime(), buzzCommand.getEndTime(), buzzCommand.getPeriod());
         this.tags = buzzCommand.getTags();
         this.interests = buzzCommand.getInterests();
         this.email = buzzCommand.getAuthEmail();

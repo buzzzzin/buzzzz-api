@@ -21,6 +21,16 @@ public class Tag {
                 '}';
     }
 
+    Tag() {
+    }
+
+    public Tag(String tag) {
+        this.tag = tag;
+        this.usedCount = 1L;
+        this.dateCreated = new Date();
+        this.lastUpdated = new Date();
+    }
+
     public Date getDateCreated() {
         return dateCreated;
     }
