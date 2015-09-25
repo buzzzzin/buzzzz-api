@@ -37,13 +37,16 @@ public class AuthenticationService {
             userAuthMapping = new UserAuthMapping();
             userAuthMapping.setAuthToken((new Date()).hashCode() + "" + user.getEmail().hashCode());
             userAuthMapping.setEmail(user.getEmail());
-            userAuthMappingRepository.save(userAuthMapping);
+            userAuthMapping = userAuthMappingRepository.save(userAuthMapping);
         }
-        loginDto.setAuthToken("token");
+        loginDto.setAuthToken(userAuthMapping.getAuthToken());
         return loginDto;
     }
 
-    private void authManage(){
-
+    public boolean logout(String authToken){
+        UserAuthMapping userAuthMapping = userAuthMappingRepository.findByAuthToken(authToken);
+        userAuthMapping.setAuthToken(null);
+        userAuthMapping = userAuthMappingRepository.save(userAuthMapping);
+        return userAuthMapping!=null;
     }
 }
