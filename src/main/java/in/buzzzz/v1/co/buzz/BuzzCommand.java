@@ -23,6 +23,7 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
     private Schedule.Period period;
     private List<String> tags;
     private List<String> interests;
+    private String description;
 
     @Override
     public boolean validate() {
@@ -143,5 +144,13 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
 
     public void setInterests(List<String> interests) {
         this.interests = interests;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

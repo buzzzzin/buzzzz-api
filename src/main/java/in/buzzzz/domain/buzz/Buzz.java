@@ -34,6 +34,7 @@ public class Buzz {
     private List<String> interests;
     private String email;
     private Status activeStatus;
+    private String description;
 
     @Override
     public String toString() {
@@ -66,6 +67,7 @@ public class Buzz {
         this.interests = buzzCommand.getInterests();
         this.email = buzzCommand.getAuthEmail();
         this.activeStatus = Status.SCHEDULED;
+        this.description=buzzCommand.getDescription();
     }
 
 
@@ -80,6 +82,7 @@ public class Buzz {
         buzzDto.setSchedule(new ScheduleDto(this.schedule));
         buzzDto.setStats(new BuzzStatsDto(this.stats));
         buzzDto.setEmail(this.email);
+        buzzDto.setDescription(this.description);
         return buzzDto;
     }
 
@@ -185,5 +188,13 @@ public class Buzz {
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
