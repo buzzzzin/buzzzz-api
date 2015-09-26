@@ -16,4 +16,6 @@ public interface BuzzRepository extends MongoRepository<Buzz, String> {
 
     List<Buzz> findByLocationWithin(Circle circle);
 
+    List<Buzz> findByInterestsAndLocationWithin(List<String> interests, Circle circle);
+
 }

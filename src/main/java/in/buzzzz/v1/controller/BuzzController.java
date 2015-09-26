@@ -1,6 +1,7 @@
 package in.buzzzz.v1.controller;
 
 import in.buzzzz.util.exceptions.GenericException;
+import in.buzzzz.v1.co.buzz.BuzzByInterestCommand;
 import in.buzzzz.v1.co.buzz.BuzzCommand;
 import in.buzzzz.v1.co.rsvp.RSVPCommand;
 import in.buzzzz.v1.data.response.ResponseDto;
@@ -36,6 +37,12 @@ public class BuzzController {
                                @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         System.out.println(buzzId);
         return prepareBuzzResponseService.createBuzzPrevireResponse(buzzService.preview(buzzId), locale);
+    }
+
+    @RequestMapping(value = "/buzzByInterest")
+    public ResponseDto findAllBuzzByInterest(@RequestBody BuzzByInterestCommand buzzByInterestCommand,
+                                             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
+        return prepareBuzzResponseService.createAllBuzzByInterestResponse(buzzService.findAllBuzzByInterest(buzzByInterestCommand), locale);
     }
 
     @RequestMapping(value = "/rsvp", method = RequestMethod.POST)
