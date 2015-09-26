@@ -21,9 +21,15 @@ public class InterestController {
     private InterestService interestService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseDto list(@RequestBody(required = false) InterestCommand interest,
-                            @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
-        return prepareInterestResponseService.createInterestListResponse(interestService.list(interest), locale);
+    public ResponseDto list(@RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
+        return prepareInterestResponseService.createInterestListResponse(interestService.list(), locale);
+    }
+
+    @RequestMapping(value = "/subscribe", method = RequestMethod.POST)
+    public ResponseDto subscribe(@RequestBody(required = false) InterestCommand interest,
+                                 @RequestHeader(value = "X-Auth-Token", required = true) String authToken,
+                                 @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
+        return prepareInterestResponseService.createInterestListResponse(interestService.subscribe(interest, authToken), locale);
     }
 
     @ExceptionHandler(GenericException.class)
