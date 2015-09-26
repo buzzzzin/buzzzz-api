@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Buzz {
@@ -36,6 +37,13 @@ public class Buzz {
 
     public Buzz() {
     }
+    public static List<BuzzDto> convertToDto(List<Buzz> buzzs){
+        List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
+        for(Buzz buzz : buzzs)
+            buzzDtos.add(buzz.convertToDto());
+        return buzzDtos;
+    }
+
 
     public Buzz(BuzzCommand buzzCommand) throws ParseException {
         this.name = buzzCommand.getName();

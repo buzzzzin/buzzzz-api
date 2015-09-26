@@ -20,6 +20,7 @@ import in.buzzzz.v1.service.auth.AuthenticationService;
 import in.buzzzz.v1.service.tag.TagBuzzMappingService;
 import in.buzzzz.v1.service.tag.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Circle;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -42,7 +43,8 @@ public class BuzzService {
 
     public List<BuzzDto> findBuzzNearMe(LocationCommand locationCommand) {
         List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
-
+        Circle circle = new Circle(locationCommand.getLatitude(),locationCommand.getLongitude(),locationCommand.getRadius());
+        buzzDtos = Buzz.convertToDto(buzzRepository.findByLocationWithin(circle));
         return buzzDtos;
     }
 
