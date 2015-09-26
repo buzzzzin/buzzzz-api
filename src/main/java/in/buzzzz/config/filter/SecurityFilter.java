@@ -22,7 +22,7 @@ public class SecurityFilter implements Filter{
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String appKey = ((HttpServletRequest)servletRequest).getHeader("Secret-Key");
-        if(appKey.equals(AppUtils.appKey))
+        if(appKey!=null && appKey.equals(AppUtils.appKey))
             filterChain.doFilter(servletRequest, servletResponse);
         else{
             ((HttpServletResponse)servletResponse).sendError(HttpStatus.UNAUTHORIZED.value(),"UnAuthorized Access");
