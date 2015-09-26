@@ -13,6 +13,7 @@ public class Interest {
     private Date dateCreated;
     private String image;
     private Boolean trending;
+    private Long usedCount;
 
     @Override
     public String toString() {
@@ -71,5 +72,13 @@ public class Interest {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public Long getUsedCount() {
+        return usedCount;
+    }
+
+    public void setUsedCount(Long usedCount) {
+        this.usedCount = usedCount;
     }
 }
