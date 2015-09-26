@@ -6,3 +6,6 @@ classes/
 out/
 .gradle/
 lib/
+nohup.out
+deploy.sh
+
