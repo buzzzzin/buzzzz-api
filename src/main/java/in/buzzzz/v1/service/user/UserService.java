@@ -23,15 +23,22 @@ public class UserService {
         if(userAuthMapping==null)
             throw new InvalidAuthTokenException();
         User user = userRepository.findByEmail(userAuthMapping.getEmail());
-        UserProfileDto profileDto = user.convertToUserProfileDto();
+        UserProfileDto profileDto = new UserProfileDto();
+        profileDto.setUser(user.convertToUserInfoDto());
         profileDto.setInterests(user.getInterests());
         profileDto.setBuzzs(Buzz.convertToDto(buzzRepository.findAllByEmail(user.getEmail())));
+        profileDto.setStats(user.convertToUserStatsDto(new Long(profileDto.getBuzzs().size())));
         return profileDto;
     }
 
     public UserProfileDto getOthersProfile(String userId){
         User user = userRepository.findById(userId);
-        return user.convertToUserProfileDto();
+        UserProfileDto profileDto = new UserProfileDto();
+        profileDto.setUser(user.convertToUserInfoDto());
+        profileDto.setInterests(user.getInterests());
+        profileDto.setBuzzs(Buzz.convertToDto(buzzRepository.findAllByEmail(user.getEmail())));
+        profileDto.setStats(user.convertToUserStatsDto(new Long(profileDto.getBuzzs().size())));
+        return profileDto;
     }
 
 }
