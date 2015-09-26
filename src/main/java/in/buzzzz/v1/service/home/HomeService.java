@@ -1,6 +1,7 @@
 package in.buzzzz.v1.service.home;
 
 import in.buzzzz.v1.co.home.HomeCommand;
+import in.buzzzz.v1.data.home.HomeDto;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,15 +10,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class HomeService {
 
-    public Object getHomeBuzzScreen(HomeCommand homeCommand){
+    public HomeDto getHomeBuzzScreen(HomeCommand homeCommand){
+        HomeDto homeDto = new HomeDto();
 
-        return null;
+        return homeDto;
     }
 
-    public Object getHomeTrendingScreen(HomeCommand homeCommand){
+    public HomeDto getHomeTrendingScreen(HomeCommand homeCommand){
+        HomeDto homeDto = new HomeDto();
 
-
-        return null;
+        return homeDto;
     }
 
 }
