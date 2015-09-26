@@ -3,15 +3,15 @@ package in.buzzzz.domain.buzz;
 public class Location {
 
     private String city;
-    private String latitude;
-    private String longitude;
+    private Double latitude;
+    private Double longitude;
     private String address;
     private String pincode;
 
     public Location() {
     }
 
-    public Location(String latitude, String longitude) {
+    public Location(Double latitude, Double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -24,19 +24,19 @@ public class Location {
         this.city = city;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
