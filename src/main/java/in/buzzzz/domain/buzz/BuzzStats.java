@@ -2,11 +2,11 @@ package in.buzzzz.domain.buzz;
 
 public class BuzzStats {
 
-    private Long goingCount;
-    private Long notComingCount;
-    private Long mayBeCount;
-    private Long viewCount;
-    private transient Long responseCount;
+    private Long goingCount =0l;
+    private Long notComingCount =0l;
+    private Long mayBeCount =0l;
+    private Long viewCount =0l;
+    private transient Long responseCount =0l;
 
     public Long getGoingCount() {
         return goingCount;
