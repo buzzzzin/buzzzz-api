@@ -37,9 +37,10 @@ public class BuzzService {
     private RSVPRepository rsvpRepository;
     @Autowired
     private TagBuzzMappingService tagBuzzMappingService;
-    @Autowired private AuthenticationService authenticationService;
+    @Autowired
+    private AuthenticationService authenticationService;
 
-    public List<BuzzDto> findBuzzNearMe(LocationCommand locationCommand){
+    public List<BuzzDto> findBuzzNearMe(LocationCommand locationCommand) {
         List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
 
         return buzzDtos;
@@ -48,6 +49,7 @@ public class BuzzService {
 
     public BuzzDto save(String authToken, BuzzCommand buzzCommand) throws GenericException, ParseException {
         String email = authenticationService.authenticateToken(authToken);
+        buzzCommand.setAuthEmail(email);
         if (buzzCommand.validate()) {
             Buzz buzz = new Buzz(buzzCommand);
             buzzRepository.save(buzz);
