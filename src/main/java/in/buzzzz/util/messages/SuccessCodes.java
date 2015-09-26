@@ -9,6 +9,9 @@ public class SuccessCodes {
 
     public static final String BUZZ_CREATE_SUCCESS = "BUZZ_CREATE_SUCCESS";
 
+    public static final String BUZZ_PREVIEW_SUCCESS = "BUZZ_PREVIEW_SUCCESS";
+    public static final String RSVP_SUCCESS = "RSVP_SUCCESS";
+
     public static final String INTEREST_LIST = "INTEREST_LIST";
 
     public static final String ERROR = "ERROR";

@@ -40,6 +40,9 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
         if (this.longitude == null || this.longitude.equals("")) {
             result = false;
         }
+        if (this.getAuthEmail() == null) {
+            result = false;
+        }
         return result;
     }
 

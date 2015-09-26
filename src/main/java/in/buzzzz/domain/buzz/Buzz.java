@@ -32,6 +32,8 @@ public class Buzz {
                 '}';
     }
 
+    public Buzz(){}
+
     public Buzz(BuzzCommand buzzCommand) throws ParseException {
         this.name = buzzCommand.getName();
         this.imageName = buzzCommand.getImageName();
@@ -48,6 +50,7 @@ public class Buzz {
 
     public BuzzDto convertToDto() {
         BuzzDto buzzDto = new BuzzDto();
+        buzzDto.setBuzzId(this.id);
         buzzDto.setName(this.name);
         buzzDto.setImageName(this.imageName);
         buzzDto.setIsRSVP(this.isRSVP);

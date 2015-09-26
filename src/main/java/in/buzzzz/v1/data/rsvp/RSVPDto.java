@@ -1,8 +1,8 @@
-package in.buzzzz.v1.data.buzz;
+package in.buzzzz.v1.data.rsvp;
 
-import in.buzzzz.data.buzz.BuzzData;
+import in.buzzzz.data.rsvp.RSVPData;
 
-public class BuzzDto implements BuzzData {
+public class RSVPDto implements RSVPData {
 
     private String buzzId;
     private String name;
