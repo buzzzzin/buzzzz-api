@@ -14,6 +14,12 @@ import java.util.List;
 
 public class Buzz {
 
+    public enum Status {
+        SCHEDULED,
+        NOW,
+        END
+    }
+
     @Id
     private String id;
     private String name;
@@ -27,6 +33,7 @@ public class Buzz {
     private List<String> tags;
     private List<String> interests;
     private String email;
+    private Status activeStatus;
 
     @Override
     public String toString() {
@@ -58,6 +65,7 @@ public class Buzz {
         this.tags = buzzCommand.getTags();
         this.interests = buzzCommand.getInterests();
         this.email = buzzCommand.getAuthEmail();
+        this.activeStatus = Status.SCHEDULED;
     }
 
 
@@ -73,6 +81,14 @@ public class Buzz {
         buzzDto.setStats(new BuzzStatsDto(this.stats));
         buzzDto.setEmail(this.email);
         return buzzDto;
+    }
+
+    public Status getActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(Status activeStatus) {
+        this.activeStatus = activeStatus;
     }
 
     public String getEmail() {
