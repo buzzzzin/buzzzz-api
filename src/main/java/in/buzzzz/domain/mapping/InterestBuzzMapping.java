@@ -1,18 +1,21 @@
 package in.buzzzz.domain.mapping;
 
+import in.buzzzz.domain.buzz.Buzz;
+import in.buzzzz.util.mq.InterestBuzzMappingDto;
+
 public class InterestBuzzMapping {
 
-    private String interestId;
     private String interestName;
     private String buzzId;
     private String buzzName;
 
-    public String getInterestId() {
-        return interestId;
+    public InterestBuzzMapping() {
     }
 
-    public void setInterestId(String interestId) {
-        this.interestId = interestId;
+    public InterestBuzzMapping(String interestName, String buzzName, String buzzId) {
+        this.interestName = interestName;
+        this.buzzName = buzzName;
+        this.buzzId = buzzId;
     }
 
     public String getInterestName() {
@@ -37,5 +40,13 @@ public class InterestBuzzMapping {
 
     public void setBuzzName(String buzzName) {
         this.buzzName = buzzName;
+    }
+
+    public static InterestBuzzMappingDto populateInterestMappingDto(Buzz buzz) {
+        InterestBuzzMappingDto interestBuzzMappingDto = new InterestBuzzMappingDto();
+        interestBuzzMappingDto.setInterests(buzz.getInterests());
+        interestBuzzMappingDto.setBuzzName(buzz.getName());
+        interestBuzzMappingDto.setBuzzId(buzz.getId());
+        return interestBuzzMappingDto;
     }
 }

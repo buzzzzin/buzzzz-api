@@ -41,6 +41,7 @@ public class Bootstrap implements InitializingBean {
                     Interest interest = new Interest();
                     interest.setName("Interest" + i);
                     interest.setImage("Interest" + i);
+                    interest.setUsedCount(0L);
                     interest.setDateCreated(new Date());
                     interestRepository.save(interest);
                 }

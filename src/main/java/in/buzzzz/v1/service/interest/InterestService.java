@@ -66,4 +66,12 @@ public class InterestService {
             userRepository.save(user);
         }
     }
+
+    public void increaseInterestCount(List<String> interests){
+        for(String interest:interests){
+            Interest interestInstance=interestRepository.findByName(interest);
+            interestInstance.setUsedCount(interestInstance.getUsedCount()+1);
+            interestRepository.save(interestInstance);
+        }
+    }
 }
