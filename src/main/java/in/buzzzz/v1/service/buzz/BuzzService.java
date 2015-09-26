@@ -74,8 +74,9 @@ public class BuzzService {
         throw new BuzzNotFoundException();
     }
 
-    public RSVPData rsvp(RSVPCommand rsvpCommand) throws GenericException {
-        rsvpCommand.setAuthEmail("jeevesh+1@gmail.com");
+    public RSVPData rsvp(String authToken, RSVPCommand rsvpCommand) throws GenericException {
+        String email = authenticationService.authenticateToken(authToken);
+        rsvpCommand.setAuthEmail(email);
         if (rsvpCommand.validate()) {
             Buzz buzz = buzzRepository.findById(rsvpCommand.getBuzzId());
             if (buzz == null) {

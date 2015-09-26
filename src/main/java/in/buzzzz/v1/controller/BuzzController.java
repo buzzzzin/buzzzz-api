@@ -40,9 +40,10 @@ public class BuzzController {
 
     @RequestMapping(value = "/rsvp", method = RequestMethod.POST)
     public ResponseDto rsvp(@RequestBody(required = false) RSVPCommand rsvpCommand,
+                            @RequestHeader(value = "X-Auth-Token",required = true) String authToken,
                             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         System.out.println(rsvpCommand.toString());
-        return prepareBuzzResponseService.createRSVPResponse(buzzService.rsvp(rsvpCommand), locale);
+        return prepareBuzzResponseService.createRSVPResponse(buzzService.rsvp(authToken,rsvpCommand), locale);
     }
 
     @ExceptionHandler(GenericException.class)
