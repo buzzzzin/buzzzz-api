@@ -5,6 +5,7 @@ import in.buzzzz.domain.user.User;
 import in.buzzzz.repository.mapping.UserAuthMappingRepository;
 import in.buzzzz.repository.user.UserRepository;
 import in.buzzzz.util.exceptions.AuthenticationException;
+import in.buzzzz.util.exceptions.auth.InvalidAuthTokenException;
 import in.buzzzz.v1.co.user.UserCommand;
 import in.buzzzz.v1.data.login.LoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,12 @@ public class AuthenticationService {
     public Boolean authenticate(String authToken) {
         UserAuthMapping userAuthMapping = userAuthMappingRepository.findByAuthToken(authToken);
         return userAuthMapping != null;
+    }
+
+    public String authenticateToken(String authToken) {
+        UserAuthMapping userAuthMapping = userAuthMappingRepository.findByAuthToken(authToken);
+        if(userAuthMapping!=null)
+            return userAuthMapping.getEmail();
+        throw new InvalidAuthTokenException();
     }
 }

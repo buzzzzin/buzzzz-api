@@ -5,6 +5,9 @@ public class SuccessCodes {
     public static final String LOGIN_SUCCESS = "LOGIN_SUCCESS";
     public static final String LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 
+    public static final String HOME_BUZZ = "HOME_BUZZ";
+    public static final String HOME_TRENDING = "HOME_TRENDING";
+
     public static final String USER_PROFILE_FETCH_SUCCESS = "USER_PROFILE_FETCH_SUCCESS";
 
     public static final String BUZZ_CREATE_SUCCESS = "BUZZ_CREATE_SUCCESS";

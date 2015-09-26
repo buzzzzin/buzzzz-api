@@ -17,6 +17,11 @@ public class InterestService {
     @Autowired
     private InterestRepository interestRepository;
 
+    public List<InterestDto> trendingInterests(){
+
+        return null;
+    }
+
     public List<InterestDto> list(InterestCommand interestCommand) {
         List<Interest> interests = interestRepository.findAll();
         List<InterestDto> interestDtos = new ArrayList<InterestDto>();
