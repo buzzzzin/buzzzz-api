@@ -8,6 +8,22 @@ public class InterestDto implements InterestData {
     private String image;
     private Boolean isSubscribed;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof InterestDto)) return false;
+
+        InterestDto that = (InterestDto) o;
+
+        return id.equals(that.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
     public String getImage() {
         return image;
     }

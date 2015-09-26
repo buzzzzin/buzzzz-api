@@ -20,6 +20,12 @@ public class PrepareBuzzResponseService extends Response {
         return responseDto;
     }
 
+    public ResponseDto createAllBuzzByInterestResponse(Object data, String locale) {
+        ResponseDto responseDto = new ResponseDto(data);
+        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.BUZZ_PREVIEW_SUCCESS, null, getLocale(locale)));
+        return responseDto;
+    }
+
     public ResponseDto createRSVPResponse(Object data, String locale) {
         ResponseDto responseDto = new ResponseDto(data);
         responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.RSVP_SUCCESS, null, getLocale(locale)));

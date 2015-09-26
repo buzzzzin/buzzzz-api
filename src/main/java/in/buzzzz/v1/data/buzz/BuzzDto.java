@@ -13,6 +13,33 @@ public class BuzzDto implements BuzzData {
     private List<String> interests;
     private LocationDto location;
     private ScheduleDto schedule;
+    private BuzzStatsDto stats;
+    private String email;
+    private String rsvpStatus;
+
+    public String getRsvpStatus() {
+        return rsvpStatus;
+    }
+
+    public void setRsvpStatus(String rsvpStatus) {
+        this.rsvpStatus = rsvpStatus;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public BuzzStatsDto getStats() {
+        return stats;
+    }
+
+    public void setStats(BuzzStatsDto stats) {
+        this.stats = stats;
+    }
 
     public List<String> getInterests() {
         return interests;

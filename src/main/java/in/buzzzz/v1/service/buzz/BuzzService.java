@@ -5,8 +5,10 @@ import in.buzzzz.domain.buzz.Buzz;
 import in.buzzzz.domain.buzz.BuzzStats;
 import in.buzzzz.domain.mapping.InterestBuzzMapping;
 import in.buzzzz.domain.mapping.TagBuzzMapping;
+import in.buzzzz.domain.mapping.UserAuthMapping;
 import in.buzzzz.domain.rsvp.RSVP;
 import in.buzzzz.repository.buzz.BuzzRepository;
+import in.buzzzz.repository.mapping.UserAuthMappingRepository;
 import in.buzzzz.repository.rsvp.RSVPRepository;
 import in.buzzzz.util.exceptions.GenericException;
 import in.buzzzz.util.exceptions.buzz.BuzzNotCreateException;
@@ -14,9 +16,11 @@ import in.buzzzz.util.exceptions.buzz.BuzzNotFoundException;
 import in.buzzzz.util.exceptions.buzz.RSVPNotCreatedException;
 import in.buzzzz.util.mq.InterestBuzzMappingDto;
 import in.buzzzz.util.mq.TagBuzzMappingDto;
+import in.buzzzz.v1.co.buzz.BuzzByInterestCommand;
 import in.buzzzz.v1.co.buzz.BuzzCommand;
 import in.buzzzz.v1.co.location.LocationCommand;
 import in.buzzzz.v1.co.rsvp.RSVPCommand;
+import in.buzzzz.v1.data.buzz.BuzzByInterestDto;
 import in.buzzzz.v1.data.buzz.BuzzDto;
 import in.buzzzz.v1.service.auth.AuthenticationService;
 import in.buzzzz.v1.service.interest.InterestBuzzMappingService;
@@ -24,9 +28,11 @@ import in.buzzzz.v1.service.interest.InterestService;
 import in.buzzzz.v1.service.tag.TagBuzzMappingService;
 import in.buzzzz.v1.service.tag.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Circle;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,13 +50,16 @@ public class BuzzService {
     @Autowired
     private AuthenticationService authenticationService;
     @Autowired
+    private UserAuthMappingRepository userAuthMappingRepository;
+    @Autowired
     private InterestService interestService;
     @Autowired
     private InterestBuzzMappingService interestBuzzMappingService;
 
     public List<BuzzDto> findBuzzNearMe(LocationCommand locationCommand) {
         List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
-
+        Circle circle = new Circle(locationCommand.getLatitude(), locationCommand.getLongitude(), locationCommand.getRadius());
+        buzzDtos = Buzz.convertToDto(buzzRepository.findByLocationWithin(circle));
         return buzzDtos;
     }
 
@@ -74,13 +83,26 @@ public class BuzzService {
         throw new BuzzNotCreateException();
     }
 
-    public BuzzDto preview(String buzzId) throws GenericException {
+    public BuzzDto preview(String buzzId, String authToken) throws GenericException {
         if (buzzId != null) {
             Buzz buzz = buzzRepository.findById(buzzId);
             if (buzz == null) {
                 throw new BuzzNotFoundException();
             }
-            return buzz.convertToDto();
+            BuzzDto buzzDto = buzz.convertToDto();
+            if (authToken != null) {
+                try {
+                    UserAuthMapping userAuthMapping = userAuthMappingRepository.findByAuthToken(authToken);
+                    System.out.println(userAuthMapping.toString());
+                    RSVP rsvp = rsvpRepository.findByEmail(userAuthMapping.getEmail());
+                    if (rsvp != null) {
+                        buzzDto.setRsvpStatus(rsvp.getStatus() != null ? rsvp.getStatus().toString() : "");
+                    }
+                } catch (Exception e) {
+                    System.out.print(e.getMessage());
+                }
+            }
+            return buzzDto;
         }
         throw new BuzzNotFoundException();
     }
@@ -137,5 +159,14 @@ public class BuzzService {
         }
         buzz.setStats(buzzStats);
         buzzRepository.save(buzz);
+    }
+
+    public BuzzByInterestDto findAllBuzzByInterest(BuzzByInterestCommand buzzByInterestCommand) {
+        List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
+        List<String> interests = new ArrayList<String>();
+        interests.add(buzzByInterestCommand.getInterest());
+        Circle circle = new Circle(buzzByInterestCommand.getLatitude(), buzzByInterestCommand.getLongitude(), buzzByInterestCommand.getRadius());
+        buzzDtos = Buzz.convertToDto(buzzRepository.findByInterestsAndLocationWithin(interests, circle));
+        return new BuzzByInterestDto(buzzDtos);
     }
 }

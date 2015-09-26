@@ -1,9 +1,8 @@
 package in.buzzzz.v1.co.location;
 
-/**
- * Created by ekansh on 26/9/15.
- */
-public class LocationCommand {
+import in.buzzzz.v1.co.pagination.PaginationCommand;
+
+public class LocationCommand extends PaginationCommand {
 
     private Double latitude;
     private Double longitude;

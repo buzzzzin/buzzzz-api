@@ -2,15 +2,23 @@ package in.buzzzz.domain.buzz;
 
 import in.buzzzz.v1.co.buzz.BuzzCommand;
 import in.buzzzz.v1.data.buzz.BuzzDto;
+import in.buzzzz.v1.data.buzz.BuzzStatsDto;
 import in.buzzzz.v1.data.buzz.LocationDto;
 import in.buzzzz.v1.data.buzz.ScheduleDto;
 import org.springframework.data.annotation.Id;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Buzz {
+
+    public enum Status {
+        SCHEDULED,
+        NOW,
+        END
+    }
 
     @Id
     private String id;
@@ -25,6 +33,7 @@ public class Buzz {
     private List<String> tags;
     private List<String> interests;
     private String email;
+    private Status activeStatus;
 
     @Override
     public String toString() {
@@ -37,17 +46,26 @@ public class Buzz {
     public Buzz() {
     }
 
+    public static List<BuzzDto> convertToDto(List<Buzz> buzzs) {
+        List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
+        for (Buzz buzz : buzzs)
+            buzzDtos.add(buzz.convertToDto());
+        return buzzDtos;
+    }
+
+
     public Buzz(BuzzCommand buzzCommand) throws ParseException {
         this.name = buzzCommand.getName();
         this.imageName = buzzCommand.getImageName();
         this.dateCreated = new Date();
         this.lastUpdated = new Date();
         this.isRSVP = buzzCommand.getIsRSVP();
-        this.location = new Location(buzzCommand.getLatitude(), buzzCommand.getLongitude());
+        this.location = new Location(buzzCommand.getLatitude(), buzzCommand.getLongitude(), buzzCommand.getAddress());
         this.schedule = new Schedule(buzzCommand.getStartTime(), buzzCommand.getEndTime(), buzzCommand.getPeriod());
         this.tags = buzzCommand.getTags();
         this.interests = buzzCommand.getInterests();
         this.email = buzzCommand.getAuthEmail();
+        this.activeStatus = Status.SCHEDULED;
     }
 
 
@@ -60,7 +78,17 @@ public class Buzz {
         buzzDto.setInterests(this.interests);
         buzzDto.setLocation(new LocationDto(this.location));
         buzzDto.setSchedule(new ScheduleDto(this.schedule));
+        buzzDto.setStats(new BuzzStatsDto(this.stats));
+        buzzDto.setEmail(this.email);
         return buzzDto;
+    }
+
+    public Status getActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(Status activeStatus) {
+        this.activeStatus = activeStatus;
     }
 
     public String getEmail() {

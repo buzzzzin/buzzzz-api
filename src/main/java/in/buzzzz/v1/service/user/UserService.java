@@ -9,9 +9,6 @@ import in.buzzzz.v1.data.user.UserProfileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by ekansh on 25/9/15.
- */
 @Service
 public class UserService {
 
