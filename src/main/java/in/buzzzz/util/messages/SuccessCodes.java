@@ -15,5 +15,6 @@ public class SuccessCodes {
     public static final String INTEREST_LIST = "INTEREST_LIST";
 
     public static final String ERROR = "ERROR";
+    public static final String AUTHENTICATE = "AUTHENTICATE";
 
 }

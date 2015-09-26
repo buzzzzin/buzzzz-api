@@ -26,7 +26,7 @@ public class PrepareAuthResponseService extends Response {
 
     public ResponseDto authenticateResponse(Object data, String locale) {
         ResponseDto responseDto = new ResponseDto(data);
-        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.BUZZ_CREATE_SUCCESS, null, getLocale(locale)));
+        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.AUTHENTICATE, null, getLocale(locale)));
         return responseDto;
     }
 
