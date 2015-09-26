@@ -38,9 +38,10 @@ public class Buzz {
 
     public Buzz() {
     }
-    public static List<BuzzDto> convertToDto(List<Buzz> buzzs){
+
+    public static List<BuzzDto> convertToDto(List<Buzz> buzzs) {
         List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
-        for(Buzz buzz : buzzs)
+        for (Buzz buzz : buzzs)
             buzzDtos.add(buzz.convertToDto());
         return buzzDtos;
     }
@@ -70,6 +71,7 @@ public class Buzz {
         buzzDto.setLocation(new LocationDto(this.location));
         buzzDto.setSchedule(new ScheduleDto(this.schedule));
         buzzDto.setStats(new BuzzStatsDto(this.stats));
+        buzzDto.setEmail(this.email);
         return buzzDto;
     }
 

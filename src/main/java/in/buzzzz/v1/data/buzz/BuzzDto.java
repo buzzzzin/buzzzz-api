@@ -14,6 +14,15 @@ public class BuzzDto implements BuzzData {
     private LocationDto location;
     private ScheduleDto schedule;
     private BuzzStatsDto stats;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public BuzzStatsDto getStats() {
         return stats;
