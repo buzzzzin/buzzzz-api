@@ -2,6 +2,7 @@ package in.buzzzz.domain.buzz;
 
 import in.buzzzz.v1.co.buzz.BuzzCommand;
 import in.buzzzz.v1.data.buzz.BuzzDto;
+import in.buzzzz.v1.data.buzz.BuzzStatsDto;
 import in.buzzzz.v1.data.buzz.LocationDto;
 import in.buzzzz.v1.data.buzz.ScheduleDto;
 import org.springframework.data.annotation.Id;
@@ -60,6 +61,7 @@ public class Buzz {
         buzzDto.setInterests(this.interests);
         buzzDto.setLocation(new LocationDto(this.location));
         buzzDto.setSchedule(new ScheduleDto(this.schedule));
+        buzzDto.setStats(new BuzzStatsDto(this.stats));
         return buzzDto;
     }
 

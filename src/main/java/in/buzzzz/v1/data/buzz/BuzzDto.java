@@ -13,6 +13,15 @@ public class BuzzDto implements BuzzData {
     private List<String> interests;
     private LocationDto location;
     private ScheduleDto schedule;
+    private BuzzStatsDto stats;
+
+    public BuzzStatsDto getStats() {
+        return stats;
+    }
+
+    public void setStats(BuzzStatsDto stats) {
+        this.stats = stats;
+    }
 
     public List<String> getInterests() {
         return interests;
