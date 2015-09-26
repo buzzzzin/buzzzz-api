@@ -2,6 +2,7 @@ package in.buzzzz.domain.user;
 
 import in.buzzzz.data.interest.InterestData;
 import in.buzzzz.v1.co.user.UserCommand;
+import in.buzzzz.v1.data.interest.InterestDto;
 import in.buzzzz.v1.data.user.UserInfoDto;
 import in.buzzzz.v1.data.user.UserProfileDto;
 import in.buzzzz.v1.data.user.UserStatsDto;
@@ -34,7 +35,7 @@ public class User {
     private String country;
     private String password;
     private RegistrationMedium medium;
-    private List<InterestData> interests;
+    private List<InterestDto> interests;
 
     public User(){}
     public User(UserCommand userCommand){
@@ -171,11 +172,11 @@ public class User {
         this.image = image;
     }
 
-    public List<InterestData> getInterests() {
+    public List<InterestDto> getInterests() {
         return interests;
     }
 
-    public void setInterests(List<InterestData> interests) {
+    public void setInterests(List<InterestDto> interests) {
         this.interests = interests;
     }
 

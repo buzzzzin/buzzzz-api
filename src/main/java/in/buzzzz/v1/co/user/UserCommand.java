@@ -4,6 +4,7 @@ import in.buzzzz.co.ValidateCommand;
 import in.buzzzz.data.interest.InterestData;
 import in.buzzzz.domain.user.RegistrationMedium;
 import in.buzzzz.domain.user.User;
+import in.buzzzz.v1.data.interest.InterestDto;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class UserCommand implements ValidateCommand {
     private String password;
     private String mediumId;
     private RegistrationMedium.Medium mediumType;
-    private List<InterestData> interests;
+    private List<InterestDto> interests;
 
     @Override
     public String toString() {
@@ -124,11 +125,11 @@ public class UserCommand implements ValidateCommand {
         this.mediumType = mediumType;
     }
 
-    public List<InterestData> getInterests() {
+    public List<InterestDto> getInterests() {
         return interests;
     }
 
-    public void setInterests(List<InterestData> interests) {
+    public void setInterests(List<InterestDto> interests) {
         this.interests = interests;
     }
 }
