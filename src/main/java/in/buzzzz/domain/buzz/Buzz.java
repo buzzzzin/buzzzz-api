@@ -2,6 +2,8 @@ package in.buzzzz.domain.buzz;
 
 import in.buzzzz.v1.co.buzz.BuzzCommand;
 import in.buzzzz.v1.data.buzz.BuzzDto;
+import in.buzzzz.v1.data.buzz.LocationDto;
+import in.buzzzz.v1.data.buzz.ScheduleDto;
 import org.springframework.data.annotation.Id;
 
 import java.text.ParseException;
@@ -32,7 +34,8 @@ public class Buzz {
                 '}';
     }
 
-    public Buzz(){}
+    public Buzz() {
+    }
 
     public Buzz(BuzzCommand buzzCommand) throws ParseException {
         this.name = buzzCommand.getName();
@@ -54,6 +57,9 @@ public class Buzz {
         buzzDto.setName(this.name);
         buzzDto.setImageName(this.imageName);
         buzzDto.setIsRSVP(this.isRSVP);
+        buzzDto.setInterests(this.interests);
+        buzzDto.setLocation(new LocationDto(this.location));
+        buzzDto.setSchedule(new ScheduleDto(this.schedule));
         return buzzDto;
     }
 
