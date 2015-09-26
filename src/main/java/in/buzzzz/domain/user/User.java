@@ -72,7 +72,7 @@ public class User {
     public UserStatsDto convertToUserStatsDto(Long buzzCount){
         UserStatsDto statsDto = new UserStatsDto();
         statsDto.setBuzzCount(buzzCount);
-        statsDto.setInterestCount(new Long(this.interests.size()));
+        statsDto.setInterestCount(new Long(this.interests==null?0:this.interests.size()));
         return statsDto;
     }
 
