@@ -5,6 +5,24 @@ import in.buzzzz.data.interest.InterestData;
 public class InterestDto implements InterestData {
     private String id;
     private String name;
+    private String image;
+    private Boolean isSubscribed;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Boolean getIsSubscribed() {
+        return isSubscribed;
+    }
+
+    public void setIsSubscribed(Boolean isSubscribed) {
+        this.isSubscribed = isSubscribed;
+    }
 
     public String getId() {
         return id;

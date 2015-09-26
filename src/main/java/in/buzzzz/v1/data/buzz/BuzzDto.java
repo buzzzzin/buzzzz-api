@@ -2,12 +2,41 @@ package in.buzzzz.v1.data.buzz;
 
 import in.buzzzz.data.buzz.BuzzData;
 
+import java.util.List;
+
 public class BuzzDto implements BuzzData {
 
     private String buzzId;
     private String name;
     private String imageName;
     private Boolean isRSVP;
+    private List<String> interests;
+    private LocationDto location;
+    private ScheduleDto schedule;
+
+    public List<String> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(List<String> interests) {
+        this.interests = interests;
+    }
+
+    public LocationDto getLocation() {
+        return location;
+    }
+
+    public void setLocation(LocationDto location) {
+        this.location = location;
+    }
+
+    public ScheduleDto getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(ScheduleDto schedule) {
+        this.schedule = schedule;
+    }
 
     public String getBuzzId() {
         return buzzId;

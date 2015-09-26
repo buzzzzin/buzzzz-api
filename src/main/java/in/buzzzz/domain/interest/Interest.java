@@ -11,6 +11,8 @@ public class Interest {
     private String id;
     private String name;
     private Date dateCreated;
+    private String image;
+    private Boolean trending;
 
     @Override
     public String toString() {
@@ -22,13 +24,31 @@ public class Interest {
     }
 
 
-    public InterestDto convertToDto(){
+    public InterestDto convertToDto() {
         InterestDto interestDto = new InterestDto();
         interestDto.setId(this.id);
         interestDto.setName(this.name);
+        interestDto.setImage(this.image);
+        interestDto.setIsSubscribed(false);
         return interestDto;
     }
-    
+
+    public Boolean getTrending() {
+        return trending;
+    }
+
+    public void setTrending(Boolean trending) {
+        this.trending = trending;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getId() {
         return id;
     }

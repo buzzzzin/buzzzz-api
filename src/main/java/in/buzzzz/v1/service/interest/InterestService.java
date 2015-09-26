@@ -5,6 +5,7 @@ import in.buzzzz.repository.interest.InterestRepository;
 import in.buzzzz.v1.co.interest.InterestCommand;
 import in.buzzzz.v1.data.interest.InterestDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +16,11 @@ public class InterestService {
 
     @Autowired
     private InterestRepository interestRepository;
+
+    public List<InterestDto> trendingInterests(){
+
+        return null;
+    }
 
     public List<InterestDto> list(InterestCommand interestCommand) {
         List<Interest> interests = interestRepository.findAll();

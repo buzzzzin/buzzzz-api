@@ -2,7 +2,6 @@ package in.buzzzz.domain.rsvp;
 
 import in.buzzzz.data.rsvp.RSVPData;
 import in.buzzzz.v1.co.rsvp.RSVPCommand;
-import in.buzzzz.v1.data.rsvp.RSVPDto;
 import org.springframework.data.annotation.Id;
 
 public class RSVP {
@@ -29,7 +28,7 @@ public class RSVP {
     }
 
     public RSVPData convertToDto() {
-       return null;
+        return null;
     }
 
     public String getEmail() {
