@@ -11,6 +11,8 @@ import in.buzzzz.v1.data.interest.InterestDataDto;
 import in.buzzzz.v1.data.interest.InterestDto;
 import in.buzzzz.v1.service.auth.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,8 +28,9 @@ public class InterestService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<InterestDto> trendingInterests() {
-        return Interest.convertToDto(interestRepository.findAllByTrending(true));
+    public List<InterestDto> trendingInterests(){
+        Pageable pageable = new PageRequest(0,25,null);
+        return Interest.convertToDto(interestRepository.findAllByTrending(true,pageable));
     }
 
     public InterestDataDto list() {
