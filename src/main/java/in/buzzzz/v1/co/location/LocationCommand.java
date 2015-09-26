@@ -4,9 +4,9 @@ import in.buzzzz.v1.co.pagination.PaginationCommand;
 
 public class LocationCommand extends PaginationCommand {
 
-    private Double latitude;
-    private Double longitude;
-    private Integer radius;
+    private Double latitude = 28.6328;
+    private Double longitude = 77.2197;
+    private Integer radius = 5000;
 
     @Override
     public String toString() {

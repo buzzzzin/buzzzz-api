@@ -18,4 +18,5 @@ public interface BuzzRepository extends MongoRepository<Buzz, String> {
 
     List<Buzz> findByInterestsAndLocationWithin(List<String> interests, Circle circle);
 
+    List<Buzz> findAllByEmail(String email);
 }
