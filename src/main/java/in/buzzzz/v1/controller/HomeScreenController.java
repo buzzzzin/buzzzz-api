@@ -1,6 +1,6 @@
 package in.buzzzz.v1.controller;
 
-import in.buzzzz.v1.co.home.HomeCommand;
+import in.buzzzz.v1.co.location.LocationCommand;
 import in.buzzzz.v1.data.response.ResponseDto;
 import in.buzzzz.v1.response.home.PrepareHomeResponseService;
 import in.buzzzz.v1.service.home.HomeService;
@@ -18,19 +18,19 @@ public class HomeScreenController {
     @Autowired private HomeService homeService;
 
     @RequestMapping(value = "/buzz")
-    public ResponseDto buzz(@RequestBody HomeCommand homeCommand,
+    public ResponseDto buzz(@RequestBody LocationCommand locationCommand,
             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale){
 
 
-        return prepareHomeResponseService.buzzResponse(homeService.getHomeBuzzScreen(homeCommand),locale);
+        return prepareHomeResponseService.buzzResponse(homeService.getHomeBuzzScreen(locationCommand),locale);
     }
 
     @RequestMapping(value = "/trending")
-    public ResponseDto trending(@RequestBody HomeCommand homeCommand,
+    public ResponseDto trending(@RequestBody LocationCommand locationCommand,
             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale){
 
 
-        return prepareHomeResponseService.trendingResponse(homeService.getHomeTrendingScreen(homeCommand),locale);
+        return prepareHomeResponseService.trendingResponse(homeService.getHomeTrendingScreen(locationCommand),locale);
     }
 
 

@@ -1,9 +1,9 @@
-package in.buzzzz.v1.co.home;
+package in.buzzzz.v1.co.location;
 
 /**
  * Created by ekansh on 26/9/15.
  */
-public class HomeCommand {
+public class LocationCommand {
 
     private String latitude;
     private String longitude;

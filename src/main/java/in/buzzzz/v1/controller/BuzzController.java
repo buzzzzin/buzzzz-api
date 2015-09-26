@@ -24,10 +24,11 @@ public class BuzzController {
     private BuzzService buzzService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ResponseDto save(@RequestBody(required = false) BuzzCommand buzz,
+    public ResponseDto save(@RequestBody BuzzCommand buzz,
+                            @RequestHeader(value = "X-Auth-Token",required = true) String authToken,
                             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) throws ParseException {
         System.out.println(buzz.toString());
-        return prepareBuzzResponseService.createBuzzResponse(buzzService.save(buzz), locale);
+        return prepareBuzzResponseService.createBuzzResponse(buzzService.save(authToken,buzz), locale);
     }
 
     @RequestMapping(value = "/preview/{id}", method = RequestMethod.GET)

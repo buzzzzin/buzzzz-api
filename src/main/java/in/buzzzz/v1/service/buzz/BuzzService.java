@@ -12,14 +12,18 @@ import in.buzzzz.util.exceptions.buzz.BuzzNotFoundException;
 import in.buzzzz.util.exceptions.buzz.RSVPNotCreatedException;
 import in.buzzzz.util.mq.TagBuzzMappingDto;
 import in.buzzzz.v1.co.buzz.BuzzCommand;
+import in.buzzzz.v1.co.location.LocationCommand;
 import in.buzzzz.v1.co.rsvp.RSVPCommand;
 import in.buzzzz.v1.data.buzz.BuzzDto;
+import in.buzzzz.v1.service.auth.AuthenticationService;
 import in.buzzzz.v1.service.tag.TagBuzzMappingService;
 import in.buzzzz.v1.service.tag.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class BuzzService {
@@ -32,8 +36,17 @@ public class BuzzService {
     private RSVPRepository rsvpRepository;
     @Autowired
     private TagBuzzMappingService tagBuzzMappingService;
+    @Autowired private AuthenticationService authenticationService;
 
-    public BuzzDto save(BuzzCommand buzzCommand) throws GenericException, ParseException {
+    public List<BuzzDto> findBuzzNearMe(LocationCommand locationCommand){
+        List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
+
+        return buzzDtos;
+    }
+
+
+    public BuzzDto save(String authToken, BuzzCommand buzzCommand) throws GenericException, ParseException {
+        String email = authenticationService.authenticateToken(authToken);
         if (buzzCommand.validate()) {
             Buzz buzz = new Buzz(buzzCommand);
             buzzRepository.save(buzz);

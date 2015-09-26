@@ -3,6 +3,7 @@ package in.buzzzz.v1.data.home;
 import in.buzzzz.v1.data.buzz.BuzzDto;
 import in.buzzzz.v1.data.interest.InterestDto;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -12,6 +13,11 @@ public class HomeDto {
 
     private List<InterestDto> interests;
     private List<BuzzDto> buzzs;
+
+    public HomeDto(){
+        this.interests = new LinkedList<InterestDto>();
+        this.buzzs = new LinkedList<BuzzDto>();
+    }
 
     public List<InterestDto> getInterests() {
         return interests;
