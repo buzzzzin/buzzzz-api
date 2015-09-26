@@ -14,8 +14,8 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
     private String name;
     private String imageName;
     private Boolean isRSVP;
-    private String latitude;
-    private String longitude;
+    private Double latitude;
+    private Double longitude;
     private String startTime;
     private String endTime;
     private Schedule.Period period;
@@ -79,19 +79,19 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
         this.isRSVP = isRSVP;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
