@@ -6,6 +6,7 @@ import in.buzzzz.repository.interest.InterestRepository;
 import in.buzzzz.repository.user.UserRepository;
 import in.buzzzz.util.exceptions.interest.InterestNotFoundException;
 import in.buzzzz.v1.co.interest.InterestCommand;
+import in.buzzzz.v1.data.interest.InterestDataDto;
 import in.buzzzz.v1.data.interest.InterestDto;
 import in.buzzzz.v1.service.auth.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +29,13 @@ public class InterestService {
         return Interest.convertToDto(interestRepository.findAllByTrending(true));
     }
 
-    public List<InterestDto> list() {
+    public InterestDataDto list() {
         List<Interest> interests = interestRepository.findAll();
         List<InterestDto> interestDtos = new ArrayList<InterestDto>();
         for (Interest interest : interests) {
             interestDtos.add(interest.convertToDto());
         }
-        return interestDtos;
+        return new InterestDataDto(interestDtos);
     }
 
     public List<InterestDto> subscribe(InterestCommand interestCommand, String authToken) {

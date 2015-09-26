@@ -25,13 +25,13 @@ public class BuzzController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseDto save(@RequestBody BuzzCommand buzz,
-                            @RequestHeader(value = "X-Auth-Token",required = true) String authToken,
+                            @RequestHeader(value = "X-Auth-Token", required = true) String authToken,
                             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) throws ParseException {
         System.out.println(buzz.toString());
-        return prepareBuzzResponseService.createBuzzResponse(buzzService.save(authToken,buzz), locale);
+        return prepareBuzzResponseService.createBuzzResponse(buzzService.save(authToken, buzz), locale);
     }
 
-    @RequestMapping(value = "/preview/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/preview/{id}", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseDto preview(@PathVariable("id") String buzzId,
                                @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         System.out.println(buzzId);
@@ -40,10 +40,10 @@ public class BuzzController {
 
     @RequestMapping(value = "/rsvp", method = RequestMethod.POST)
     public ResponseDto rsvp(@RequestBody(required = false) RSVPCommand rsvpCommand,
-                            @RequestHeader(value = "X-Auth-Token",required = true) String authToken,
+                            @RequestHeader(value = "X-Auth-Token", required = true) String authToken,
                             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         System.out.println(rsvpCommand.toString());
-        return prepareBuzzResponseService.createRSVPResponse(buzzService.rsvp(authToken,rsvpCommand), locale);
+        return prepareBuzzResponseService.createRSVPResponse(buzzService.rsvp(authToken, rsvpCommand), locale);
     }
 
     @ExceptionHandler(GenericException.class)
