@@ -75,16 +75,17 @@ public class BuzzService {
     }
 
     public RSVPData rsvp(RSVPCommand rsvpCommand) throws GenericException {
+        rsvpCommand.setAuthEmail("jeevesh+1@gmail.com");
         if (rsvpCommand.validate()) {
             Buzz buzz = buzzRepository.findById(rsvpCommand.getBuzzId());
             if (buzz == null) {
                 throw new BuzzNotFoundException();
             }
-            RSVP rsvp = rsvpRepository.findByBuzzIdAndEmailAndStatus(rsvpCommand.getBuzzId(), rsvpCommand.getAuthEmail(), rsvpCommand.getStatus());
+            RSVP rsvp = rsvpRepository.findByBuzzIdAndEmail(rsvpCommand.getBuzzId(), rsvpCommand.getAuthEmail());
             if (rsvp != null) {
-                rsvp.setStatus(rsvpCommand.getStatus());
                 //TODO:Make this task asynk
                 updateRSVPStatsToBuzz(rsvp, buzz);
+                rsvp.setStatus(rsvpCommand.getStatus());
             } else {
                 rsvp = new RSVP(rsvpCommand);
             }
@@ -97,7 +98,7 @@ public class BuzzService {
     }
 
     private void addRSVPStatsToBuzz(RSVPCommand rsvpCommand, Buzz buzz) {
-        BuzzStats buzzStats = new BuzzStats();
+        BuzzStats buzzStats = buzz.getStats() == null ? new BuzzStats() : buzz.getStats();
         if (rsvpCommand.getStatus() == RSVP.RSVPStatus.YES) {
             buzzStats.setGoingCount(buzzStats.getGoingCount() == null ? 1l : buzzStats.getGoingCount() + 1);
         }
@@ -107,22 +108,22 @@ public class BuzzService {
         if (rsvpCommand.getStatus() == RSVP.RSVPStatus.MAY_BE) {
             buzzStats.setMayBeCount(buzzStats.getMayBeCount() == null ? 1l : buzzStats.getMayBeCount() + 1);
         }
-        buzz.setStats(new BuzzStats());
+        buzz.setStats(buzzStats);
         buzzRepository.save(buzz);
     }
 
     private void updateRSVPStatsToBuzz(RSVP rsvp, Buzz buzz) {
-        BuzzStats buzzStats = new BuzzStats();
+        BuzzStats buzzStats = buzz.getStats() == null ? new BuzzStats() : buzz.getStats();
         if (rsvp.getStatus() == RSVP.RSVPStatus.YES) {
-            buzzStats.setGoingCount(buzzStats.getGoingCount() - 1);
+            buzzStats.setGoingCount(buzzStats.getGoingCount() == null ? 0 : buzzStats.getGoingCount() - 1);
         }
         if (rsvp.getStatus() == RSVP.RSVPStatus.NO) {
-            buzzStats.setNotComingCount(buzzStats.getNotComingCount() - 1);
+            buzzStats.setNotComingCount(buzzStats.getNotComingCount() == null ? 0 : buzzStats.getNotComingCount() - 1);
         }
         if (rsvp.getStatus() == RSVP.RSVPStatus.MAY_BE) {
-            buzzStats.setMayBeCount(buzzStats.getMayBeCount() - 1);
+            buzzStats.setMayBeCount(buzzStats.getMayBeCount() == null ? 0 : buzzStats.getMayBeCount() - 1);
         }
-        buzz.setStats(new BuzzStats());
+        buzz.setStats(buzzStats);
         buzzRepository.save(buzz);
     }
 }
