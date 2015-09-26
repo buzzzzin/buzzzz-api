@@ -5,6 +5,7 @@ import in.buzzzz.co.ValidateCommand;
 import in.buzzzz.domain.buzz.Schedule;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BuzzCommand extends AuthenticationCommand implements ValidateCommand, Serializable {
@@ -129,7 +130,7 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
     }
 
     public List<String> getTags() {
-        return tags;
+        return tags==null?new ArrayList<String>():tags;
     }
 
     public void setTags(List<String> tags) {
@@ -137,7 +138,7 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
     }
 
     public List<String> getInterests() {
-        return interests;
+        return interests==null?new ArrayList<String>():interests;
     }
 
     public void setInterests(List<String> interests) {
