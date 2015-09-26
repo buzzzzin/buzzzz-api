@@ -35,6 +35,12 @@ public class AuthController {
         return prepareAuthResponseService.logoutResponse(authenticationService.logout(authToken), locale);
     }
 
+    @RequestMapping(value = "/verification", method = RequestMethod.POST)
+    public ResponseDto verification(@RequestHeader(value = "X-Auth-Token", required = true) String authToken,
+                                    @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale){
+        return prepareAuthResponseService.authenticateResponse(authenticationService.authenticate(authToken), locale);
+    }
+
     @ExceptionHandler(GenericException.class)
     private ResponseDto catchException(GenericException e) {
         return prepareErrorResponseService.catchException(e, null);

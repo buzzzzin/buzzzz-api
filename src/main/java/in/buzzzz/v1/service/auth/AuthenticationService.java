@@ -12,29 +12,27 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-/**
- * Created by ekansh on 26/9/15.
- */
 @Service
 public class AuthenticationService {
 
-    @Autowired private UserRepository userRepository;
-    @Autowired private UserAuthMappingRepository userAuthMappingRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserAuthMappingRepository userAuthMappingRepository;
 
-    public LoginDto login(UserCommand userCommand){
+    public LoginDto login(UserCommand userCommand) {
         User user = userRepository.findByEmail(userCommand.getEmail());
         LoginDto loginDto = new LoginDto();
-        if(user==null){
+        if (user == null) {
             user = userRepository.save(new User(userCommand));
             loginDto.setUser(user.convertToUserInfoDto());
             loginDto.setHasInterests(false);
-        }
-        else{
+        } else {
             loginDto.setUser(user.convertToUserInfoDto());
-            loginDto.setHasInterests(user.getInterests()!=null?user.getInterests().size()!=0:false);
+            loginDto.setHasInterests(user.getInterests() != null ? user.getInterests().size() != 0 : false);
         }
         UserAuthMapping userAuthMapping = userAuthMappingRepository.findByEmail(user.getEmail());
-        if(userAuthMapping==null || userAuthMapping.getAuthToken()==null){
+        if (userAuthMapping == null || userAuthMapping.getAuthToken() == null) {
             userAuthMapping = new UserAuthMapping();
             userAuthMapping.setAuthToken((new Date()).hashCode() + "" + user.getEmail().hashCode());
             userAuthMapping.setEmail(user.getEmail());
@@ -44,12 +42,17 @@ public class AuthenticationService {
         return loginDto;
     }
 
-    public boolean logout(String authToken){
+    public boolean logout(String authToken) {
         UserAuthMapping userAuthMapping = userAuthMappingRepository.findByAuthToken(authToken);
-        if(userAuthMapping==null)
+        if (userAuthMapping == null)
             throw new AuthenticationException();
         userAuthMapping.setAuthToken(null);
         userAuthMapping = userAuthMappingRepository.save(userAuthMapping);
-        return userAuthMapping!=null;
+        return userAuthMapping != null;
+    }
+
+    public Boolean authenticate(String authToken) {
+        UserAuthMapping userAuthMapping = userAuthMappingRepository.findByAuthToken(authToken);
+        return userAuthMapping != null;
     }
 }
