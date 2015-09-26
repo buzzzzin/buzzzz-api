@@ -2,9 +2,14 @@ package in.buzzzz.domain.mapping;
 
 import in.buzzzz.domain.buzz.Buzz;
 import in.buzzzz.util.mq.InterestBuzzMappingDto;
+import org.springframework.data.annotation.Id;
+
+import java.util.ArrayList;
 
 public class InterestBuzzMapping {
 
+    @Id
+    private String id;
     private String interestName;
     private String buzzId;
     private String buzzName;
@@ -12,7 +17,7 @@ public class InterestBuzzMapping {
     public InterestBuzzMapping() {
     }
 
-    public InterestBuzzMapping(String interestName, String buzzName, String buzzId) {
+    public InterestBuzzMapping(String interestName,String buzzId,String buzzName) {
         this.interestName = interestName;
         this.buzzName = buzzName;
         this.buzzId = buzzId;
@@ -42,9 +47,17 @@ public class InterestBuzzMapping {
         this.buzzName = buzzName;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public static InterestBuzzMappingDto populateInterestMappingDto(Buzz buzz) {
         InterestBuzzMappingDto interestBuzzMappingDto = new InterestBuzzMappingDto();
-        interestBuzzMappingDto.setInterests(buzz.getInterests());
+        interestBuzzMappingDto.setInterests(buzz.getInterests()==null?new ArrayList<String>():buzz.getInterests());
         interestBuzzMappingDto.setBuzzName(buzz.getName());
         interestBuzzMappingDto.setBuzzId(buzz.getId());
         return interestBuzzMappingDto;
