@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 public class PrepareErrorResponseService extends Response {
 
     public ResponseDto catchException(Exception e, String locale) {
+        locale= "UK";
         ResponseDto responseDto = new ResponseDto(e.getCause());
         responseDto.setMessage(getMessageSource().getMessage(e.getMessage(), null, getLocale(locale)));
         return responseDto;

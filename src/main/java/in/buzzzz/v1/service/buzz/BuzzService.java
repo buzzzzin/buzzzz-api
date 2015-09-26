@@ -55,7 +55,7 @@ public class BuzzService {
             }
             return buzz.convertToDto();
         }
-        throw new BuzzNotCreateException();
+        throw new BuzzNotFoundException();
     }
 
     public RSVPData rsvp(RSVPCommand rsvpCommand) throws GenericException {
