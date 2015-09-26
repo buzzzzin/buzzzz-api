@@ -27,7 +27,7 @@ public class Bootstrap implements InitializingBean {
         System.out.println("   START BOOTSTRAP");
         System.out.println("###########################");
         try {
-            if (interestRepository.findByName("Blood") == null) {
+            if (interestRepository.count() == 0) {
                 Interest interest = new Interest();
                 interest.setName("Blood");
                 interest.setImage("v1443273588/interest/blood.png");
