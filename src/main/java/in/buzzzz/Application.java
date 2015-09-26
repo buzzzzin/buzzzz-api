@@ -37,9 +37,4 @@ public class Application {
         return source;
     }
 
-//    @Bean
-//    public SessionFactory sessionFactory(HibernateEntityManagerFactory hemf) {
-//        return hemf.getSessionFactory();
-//    }
-
 }
