@@ -18,7 +18,7 @@ public class HomeScreenController {
     @Autowired private HomeService homeService;
 
     @RequestMapping(value = "/buzz")
-    public ResponseDto buzz(@RequestBody LocationCommand locationCommand,
+    public ResponseDto buzz(@RequestBody(required = false) LocationCommand locationCommand,
             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale){
         return prepareHomeResponseService.buzzResponse(homeService.getHomeBuzzScreen(locationCommand),locale);
     }

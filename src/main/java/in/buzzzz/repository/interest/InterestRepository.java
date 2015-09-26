@@ -10,6 +10,7 @@ public interface InterestRepository extends MongoRepository<Interest, String> {
 
     Interest findById(String id);
     Interest findByName(String name);
-
     List<Interest> findAllByTrending(Boolean trending,Pageable pageable);
+
+
 }

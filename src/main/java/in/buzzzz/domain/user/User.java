@@ -1,6 +1,5 @@
 package in.buzzzz.domain.user;
 
-import in.buzzzz.data.interest.InterestData;
 import in.buzzzz.v1.co.user.UserCommand;
 import in.buzzzz.v1.data.interest.InterestDto;
 import in.buzzzz.v1.data.user.UserInfoDto;
@@ -9,6 +8,7 @@ import in.buzzzz.v1.data.user.UserStatsDto;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -173,7 +173,7 @@ public class User {
     }
 
     public List<InterestDto> getInterests() {
-        return interests;
+        return interests==null?new LinkedList<InterestDto>():interests;
     }
 
     public void setInterests(List<InterestDto> interests) {
