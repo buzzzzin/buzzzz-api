@@ -5,6 +5,8 @@ public class BuzzStats {
     private Long goingCount;
     private Long notComingCount;
     private Long mayBeCount;
+    private Long viewCount;
+    private transient Long responseCount;
 
     public Long getGoingCount() {
         return goingCount;
@@ -28,5 +30,21 @@ public class BuzzStats {
 
     public void setMayBeCount(Long mayBeCount) {
         this.mayBeCount = mayBeCount;
+    }
+
+    public Long getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    public Long getResponseCount() {
+        return goingCount + notComingCount + mayBeCount;
+    }
+
+    public void setResponseCount(Long responseCount) {
+        this.responseCount = responseCount;
     }
 }
