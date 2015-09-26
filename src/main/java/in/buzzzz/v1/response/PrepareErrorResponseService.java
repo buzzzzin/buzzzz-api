@@ -10,6 +10,7 @@ public class PrepareErrorResponseService extends Response {
     public ResponseDto catchException(Exception e, String locale) {
         locale= "UK";
         ResponseDto responseDto = new ResponseDto(e.getCause());
+        responseDto.setStatus(0);
         responseDto.setMessage(getMessageSource().getMessage(e.getMessage(), null, getLocale(locale)));
         return responseDto;
     }
