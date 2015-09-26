@@ -34,7 +34,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.springframework.boot:spring-boot-starter-mail")
 //    compile("com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.6.1")
-    testCompile("org.springframework.boot:spring-boot-starter-test") 
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile("org.springframework.boot:spring-boot-starter-amqp")
 }
 
 

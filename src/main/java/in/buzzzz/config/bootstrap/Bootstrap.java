@@ -2,8 +2,11 @@ package in.buzzzz.config.bootstrap;
 
 import in.buzzzz.domain.interest.Interest;
 import in.buzzzz.repository.interest.InterestRepository;
+import in.buzzzz.v1.mq.sender.DemoSender;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -13,6 +16,8 @@ public class Bootstrap implements InitializingBean {
 
     @Autowired
     private InterestRepository interestRepository;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -50,9 +55,18 @@ public class Bootstrap implements InitializingBean {
             System.out.println(e.getMessage());
         }
 
+        startRabbitMQListeners();
+
         System.out.println("###########################");
         System.out.println("   END  BOOTSTRAP");
         System.out.println("###########################");
+    }
+
+    void startRabbitMQListeners() throws Exception {
+        System.out.println("############sending data into queue....################");
+        System.out.println("");
+        rabbitTemplate.convertAndSend("spring-boot", "Hello from RabbitMQ!");
+        System.out.println("############Data sent......################");
     }
 
 
