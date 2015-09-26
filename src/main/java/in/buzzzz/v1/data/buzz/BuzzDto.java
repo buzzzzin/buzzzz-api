@@ -15,6 +15,15 @@ public class BuzzDto implements BuzzData {
     private ScheduleDto schedule;
     private BuzzStatsDto stats;
     private String email;
+    private String rsvpStatus;
+
+    public String getRsvpStatus() {
+        return rsvpStatus;
+    }
+
+    public void setRsvpStatus(String rsvpStatus) {
+        this.rsvpStatus = rsvpStatus;
+    }
 
     public String getEmail() {
         return email;

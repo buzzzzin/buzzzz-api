@@ -4,8 +4,10 @@ import in.buzzzz.data.rsvp.RSVPData;
 import in.buzzzz.domain.buzz.Buzz;
 import in.buzzzz.domain.buzz.BuzzStats;
 import in.buzzzz.domain.mapping.TagBuzzMapping;
+import in.buzzzz.domain.mapping.UserAuthMapping;
 import in.buzzzz.domain.rsvp.RSVP;
 import in.buzzzz.repository.buzz.BuzzRepository;
+import in.buzzzz.repository.mapping.UserAuthMappingRepository;
 import in.buzzzz.repository.rsvp.RSVPRepository;
 import in.buzzzz.util.exceptions.GenericException;
 import in.buzzzz.util.exceptions.buzz.BuzzNotCreateException;
@@ -43,6 +45,8 @@ public class BuzzService {
     private TagBuzzMappingService tagBuzzMappingService;
     @Autowired
     private AuthenticationService authenticationService;
+    @Autowired
+    private UserAuthMappingRepository userAuthMappingRepository;
 
     public List<BuzzDto> findBuzzNearMe(LocationCommand locationCommand) {
         List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
@@ -68,13 +72,26 @@ public class BuzzService {
         throw new BuzzNotCreateException();
     }
 
-    public BuzzDto preview(String buzzId) throws GenericException {
+    public BuzzDto preview(String buzzId, String authToken) throws GenericException {
         if (buzzId != null) {
             Buzz buzz = buzzRepository.findById(buzzId);
             if (buzz == null) {
                 throw new BuzzNotFoundException();
             }
-            return buzz.convertToDto();
+            BuzzDto buzzDto = buzz.convertToDto();
+            if (authToken != null) {
+                try {
+                    UserAuthMapping userAuthMapping = userAuthMappingRepository.findByAuthToken(authToken);
+                    System.out.println(userAuthMapping.toString());
+                    RSVP rsvp = rsvpRepository.findByEmail(userAuthMapping.getEmail());
+                    if (rsvp != null) {
+                        buzzDto.setRsvpStatus(rsvp.getStatus() != null ? rsvp.getStatus().toString() : "");
+                    }
+                } catch (Exception e) {
+                    System.out.print(e.getMessage());
+                }
+            }
+            return buzzDto;
         }
         throw new BuzzNotFoundException();
     }

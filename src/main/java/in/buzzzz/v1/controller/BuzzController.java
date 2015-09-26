@@ -34,9 +34,10 @@ public class BuzzController {
 
     @RequestMapping(value = "/preview/{id}", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseDto preview(@PathVariable("id") String buzzId,
+                               @RequestHeader(value = "X-Auth-Token", required = false) String authToken,
                                @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         System.out.println(buzzId);
-        return prepareBuzzResponseService.createBuzzPrevireResponse(buzzService.preview(buzzId), locale);
+        return prepareBuzzResponseService.createBuzzPrevireResponse(buzzService.preview(buzzId,authToken), locale);
     }
 
     @RequestMapping(value = "/buzzByInterest")

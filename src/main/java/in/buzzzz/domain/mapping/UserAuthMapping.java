@@ -2,14 +2,19 @@ package in.buzzzz.domain.mapping;
 
 import org.springframework.data.annotation.Id;
 
-/**
- * Created by ekansh on 26/9/15.
- */
 public class UserAuthMapping {
 
     @Id
     private String email;
     private String authToken;
+
+    @Override
+    public String toString() {
+        return "UserAuthMapping{" +
+                "email='" + email + '\'' +
+                ", authToken='" + authToken + '\'' +
+                '}';
+    }
 
     public String getEmail() {
         return email;
