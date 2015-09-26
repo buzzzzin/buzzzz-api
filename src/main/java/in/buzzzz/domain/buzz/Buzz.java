@@ -53,7 +53,7 @@ public class Buzz {
         this.dateCreated = new Date();
         this.lastUpdated = new Date();
         this.isRSVP = buzzCommand.getIsRSVP();
-        this.location = new Location(buzzCommand.getLatitude(), buzzCommand.getLongitude());
+        this.location = new Location(buzzCommand.getLatitude(), buzzCommand.getLongitude(), buzzCommand.getAddress());
         this.schedule = new Schedule(buzzCommand.getStartTime(), buzzCommand.getEndTime(), buzzCommand.getPeriod());
         this.tags = buzzCommand.getTags();
         this.interests = buzzCommand.getInterests();

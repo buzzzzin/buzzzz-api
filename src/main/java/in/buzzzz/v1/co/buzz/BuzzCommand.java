@@ -16,6 +16,7 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
     private Boolean isRSVP;
     private Double latitude;
     private Double longitude;
+    private String address;
     private String startTime;
     private String endTime;
     private Schedule.Period period;
@@ -34,10 +35,10 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
         if (this.period == null) {
             result = false;
         }
-        if (this.latitude == null || this.latitude.equals("")) {
+        if (this.latitude == null) {
             result = false;
         }
-        if (this.longitude == null || this.longitude.equals("")) {
+        if (this.longitude == null) {
             result = false;
         }
         if (this.getAuthEmail() == null) {
@@ -53,6 +54,14 @@ public class BuzzCommand extends AuthenticationCommand implements ValidateComman
                 ", startTime='" + startTime + '\'' +
                 ", period=" + period +
                 '}';
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getName() {
