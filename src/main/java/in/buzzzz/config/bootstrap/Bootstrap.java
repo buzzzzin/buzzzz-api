@@ -20,7 +20,23 @@ public class Bootstrap implements InitializingBean {
         System.out.println("   START BOOTSTRAP");
         System.out.println("###########################");
         try {
-            if (interestRepository.count() ==0) {
+            if (interestRepository.findByName("One") == null) {
+                Interest interest = new Interest();
+                interest.setName("One");
+                interest.setImage("One");
+                interest.setDateCreated(new Date());
+                interest.setTrending(true);
+                interestRepository.save(interest);
+                for (int i = 0; i <= 10; i++) {
+                    Interest interest1 = new Interest();
+                    interest1.setName("Interest" + i);
+                    interest1.setImage("Interest" + i);
+                    interest1.setDateCreated(new Date());
+                    interest1.setTrending(true);
+                    interestRepository.save(interest1);
+                }
+            }
+            if (interestRepository.count() == 0) {
                 for (int i = 0; i <= 20; i++) {
                     Interest interest = new Interest();
                     interest.setName("Interest" + i);

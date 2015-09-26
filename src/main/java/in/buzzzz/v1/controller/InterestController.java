@@ -20,7 +20,7 @@ public class InterestController {
     @Autowired
     private InterestService interestService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseDto list(@RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         return prepareInterestResponseService.createInterestListResponse(interestService.list(), locale);
     }
