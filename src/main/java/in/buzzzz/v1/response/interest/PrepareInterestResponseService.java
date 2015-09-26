@@ -13,4 +13,10 @@ public class PrepareInterestResponseService extends Response {
         responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.INTEREST_LIST, null, getLocale(locale)));
         return responseDto;
     }
+
+    public ResponseDto createSubscribeListResponse(Object data, String locale) {
+        ResponseDto responseDto = new ResponseDto(data);
+        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.SUBSCRIBE_LIST, null, getLocale(locale)));
+        return responseDto;
+    }
 }

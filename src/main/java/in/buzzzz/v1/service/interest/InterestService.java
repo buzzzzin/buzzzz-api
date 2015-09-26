@@ -4,6 +4,7 @@ import in.buzzzz.domain.interest.Interest;
 import in.buzzzz.domain.user.User;
 import in.buzzzz.repository.interest.InterestRepository;
 import in.buzzzz.repository.user.UserRepository;
+import in.buzzzz.util.exceptions.GenericException;
 import in.buzzzz.util.exceptions.interest.InterestNotFoundException;
 import in.buzzzz.v1.co.interest.InterestCommand;
 import in.buzzzz.v1.data.interest.InterestDataDto;
@@ -38,7 +39,7 @@ public class InterestService {
         return new InterestDataDto(interestDtos);
     }
 
-    public List<InterestDto> subscribe(InterestCommand interestCommand, String authToken) {
+    public List<InterestDto> subscribe(InterestCommand interestCommand, String authToken) throws GenericException{
         String email = authenticationService.authenticateToken(authToken);
         interestCommand.setAuthEmail(email);
         Interest interest = interestRepository.findById(interestCommand.getInterestId());
@@ -52,12 +53,14 @@ public class InterestService {
     private void assignInterestToUser(String email, Interest interest) {
         User user = userRepository.findByEmail(email);
         InterestDto interestDto = new InterestDto();
-        List<InterestDto> interestDtos = new ArrayList<InterestDto>();
         interestDto.setName(interest.getName());
         interestDto.setImage(interest.getImage());
         interestDto.setId(interest.getId());
-        interestDtos.add(interestDto);
-        user.setInterests(interestDtos);
-        userRepository.save(user);
+        if (!user.getInterests().contains(interestDto)) {
+            List<InterestDto> interestDtos = user.getInterests();
+            interestDtos.add(interestDto);
+            user.setInterests(interestDtos);
+            userRepository.save(user);
+        }
     }
 }

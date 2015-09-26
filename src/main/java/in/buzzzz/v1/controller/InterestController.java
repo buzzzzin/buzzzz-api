@@ -29,7 +29,7 @@ public class InterestController {
     public ResponseDto subscribe(@RequestBody(required = false) InterestCommand interest,
                                  @RequestHeader(value = "X-Auth-Token", required = true) String authToken,
                                  @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
-        return prepareInterestResponseService.createInterestListResponse(interestService.subscribe(interest, authToken), locale);
+        return prepareInterestResponseService.createSubscribeListResponse(interestService.subscribe(interest, authToken), locale);
     }
 
     @ExceptionHandler(GenericException.class)
