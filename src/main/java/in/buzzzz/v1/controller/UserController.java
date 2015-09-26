@@ -8,28 +8,28 @@ import in.buzzzz.v1.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Created by ekansh on 25/9/15.
+ */
 @RestController
 @RequestMapping(value = "/v1/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PrepareUserResponseService prepareUserResponseService;
-    @Autowired
-    private PrepareErrorResponseService prepareErrorResponseService;
+    @Autowired private UserService userService;
+    @Autowired private PrepareUserResponseService prepareUserResponseService;
+    @Autowired private PrepareErrorResponseService prepareErrorResponseService;
 
     @RequestMapping("/myProfile")
     public ResponseDto myProfile(
             @RequestHeader(value = "X-Auth-Token", required = true) String authToken,
-            @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
-        return prepareUserResponseService.profileResponse(authToken, locale);
+        @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale){
+        return prepareUserResponseService.profileResponse(userService.getMyProfile(authToken),locale);
     }
 
     @RequestMapping("/othersProfile/{id}")
-    public ResponseDto othersProfile(@PathVariable("id") String userId,
-                                     @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
-        return prepareUserResponseService.profileResponse(userService.getOthersProfile(userId), locale);
+    public ResponseDto othersProfile(@PathVariable("id")String userId,
+            @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale){
+        return prepareUserResponseService.profileResponse(userService.getOthersProfile(userId),locale);
     }
 
 

@@ -10,7 +10,7 @@ public class PrepareUserResponseService extends Response {
 
     public ResponseDto profileResponse(Object data, String locale) {
         ResponseDto responseDto = new ResponseDto(data);
-        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.BUZZ_CREATE_SUCCESS, null, getLocale(locale)));
+        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.USER_PROFILE_FETCH_SUCCESS,null,getLocale(locale)));
         return responseDto;
     }
 
