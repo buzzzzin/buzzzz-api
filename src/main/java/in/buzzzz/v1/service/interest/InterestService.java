@@ -6,7 +6,6 @@ import in.buzzzz.v1.co.interest.InterestCommand;
 import in.buzzzz.v1.data.interest.InterestDto;
 import in.buzzzz.v1.service.auth.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,8 +20,7 @@ public class InterestService {
     private AuthenticationService authenticationService;
 
     public List<InterestDto> trendingInterests(){
-
-        return null;
+        return Interest.convertToDto(interestRepository.findAllByTrending(true));
     }
 
     public List<InterestDto> list() {

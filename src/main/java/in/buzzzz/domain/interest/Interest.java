@@ -4,6 +4,8 @@ import in.buzzzz.v1.data.interest.InterestDto;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Interest {
 
@@ -23,6 +25,12 @@ public class Interest {
                 '}';
     }
 
+    public static List<InterestDto> convertToDto(List<Interest> interests){
+        List<InterestDto> interestDtos = new LinkedList<InterestDto>();
+        for (Interest interest : interests)
+            interestDtos.add(interest.convertToDto());
+        return interestDtos;
+    }
 
     public InterestDto convertToDto() {
         InterestDto interestDto = new InterestDto();
