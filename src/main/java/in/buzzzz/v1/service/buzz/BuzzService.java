@@ -3,6 +3,7 @@ package in.buzzzz.v1.service.buzz;
 import in.buzzzz.data.rsvp.RSVPData;
 import in.buzzzz.domain.buzz.Buzz;
 import in.buzzzz.domain.buzz.BuzzStats;
+import in.buzzzz.domain.mapping.InterestBuzzMapping;
 import in.buzzzz.domain.mapping.TagBuzzMapping;
 import in.buzzzz.domain.rsvp.RSVP;
 import in.buzzzz.repository.buzz.BuzzRepository;
@@ -11,12 +12,15 @@ import in.buzzzz.util.exceptions.GenericException;
 import in.buzzzz.util.exceptions.buzz.BuzzNotCreateException;
 import in.buzzzz.util.exceptions.buzz.BuzzNotFoundException;
 import in.buzzzz.util.exceptions.buzz.RSVPNotCreatedException;
+import in.buzzzz.util.mq.InterestBuzzMappingDto;
 import in.buzzzz.util.mq.TagBuzzMappingDto;
 import in.buzzzz.v1.co.buzz.BuzzCommand;
 import in.buzzzz.v1.co.location.LocationCommand;
 import in.buzzzz.v1.co.rsvp.RSVPCommand;
 import in.buzzzz.v1.data.buzz.BuzzDto;
 import in.buzzzz.v1.service.auth.AuthenticationService;
+import in.buzzzz.v1.service.interest.InterestBuzzMappingService;
+import in.buzzzz.v1.service.interest.InterestService;
 import in.buzzzz.v1.service.tag.TagBuzzMappingService;
 import in.buzzzz.v1.service.tag.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +43,10 @@ public class BuzzService {
     private TagBuzzMappingService tagBuzzMappingService;
     @Autowired
     private AuthenticationService authenticationService;
+    @Autowired
+    private InterestService interestService;
+    @Autowired
+    private InterestBuzzMappingService interestBuzzMappingService;
 
     public List<BuzzDto> findBuzzNearMe(LocationCommand locationCommand) {
         List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
@@ -56,8 +64,11 @@ public class BuzzService {
 
             //TODO need to apply rabbit MQ call here
             TagBuzzMappingDto tagBuzzMappingDto = TagBuzzMapping.populateTagBuzzMappingDto(buzz);
+            InterestBuzzMappingDto interestBuzzMappingDto= InterestBuzzMapping.populateInterestMappingDto(buzz);
             tagService.createOrUpdateTags(buzzCommand.getTags());
             tagBuzzMappingService.createTagBuzzMapping(tagBuzzMappingDto);
+            interestService.increaseInterestCount(buzzCommand.getInterests());
+            interestBuzzMappingService.createInterestBuggMapping(interestBuzzMappingDto);
             return buzz.convertToDto();
         }
         throw new BuzzNotCreateException();
