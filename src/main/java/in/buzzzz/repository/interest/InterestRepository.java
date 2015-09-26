@@ -1,12 +1,13 @@
 package in.buzzzz.repository.interest;
 
-import in.buzzzz.domain.buzz.Buzz;
 import in.buzzzz.domain.interest.Interest;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.List;
+
 public interface InterestRepository extends MongoRepository<Interest, String> {
 
-    Buzz findById(String id);
-
-    Buzz findByName(String name);
+    Interest findById(String id);
+    Interest findByName(String name);
+    List<Interest> findAllByTrending(Boolean trending);
 }
