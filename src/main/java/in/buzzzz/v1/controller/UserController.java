@@ -23,7 +23,7 @@ public class UserController {
     public ResponseDto myProfile(
             @RequestHeader(value = "X-Auth-Token", required = true) String authToken,
         @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale){
-        return prepareUserResponseService.profileResponse(authToken,locale);
+        return prepareUserResponseService.profileResponse(userService.getMyProfile(authToken),locale);
     }
 
     @RequestMapping("/othersProfile/{id}")

@@ -12,4 +12,7 @@ public class AuthenticationException extends GenericException{
     public AuthenticationException() {
         super(message);
     }
+    public AuthenticationException(String message){
+        super(message);
+    }
 }
