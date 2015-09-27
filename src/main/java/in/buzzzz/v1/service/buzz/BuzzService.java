@@ -73,7 +73,7 @@ public class BuzzService {
 
             //TODO need to apply rabbit MQ call here
             TagBuzzMappingDto tagBuzzMappingDto = TagBuzzMapping.populateTagBuzzMappingDto(buzz);
-            InterestBuzzMappingDto interestBuzzMappingDto= InterestBuzzMapping.populateInterestMappingDto(buzz);
+            InterestBuzzMappingDto interestBuzzMappingDto = InterestBuzzMapping.populateInterestMappingDto(buzz);
             tagService.createOrUpdateTags(buzzCommand.getTags());
             tagBuzzMappingService.createTagBuzzMapping(tagBuzzMappingDto);
             interestService.increaseInterestCount(buzzCommand.getInterests());
@@ -166,7 +166,7 @@ public class BuzzService {
         List<String> interests = new ArrayList<String>();
         interests.add(buzzByInterestCommand.getInterest());
         Circle circle = new Circle(buzzByInterestCommand.getLatitude(), buzzByInterestCommand.getLongitude(), buzzByInterestCommand.getRadius());
-        buzzDtos = Buzz.convertToDto(buzzRepository.findByInterestsAndLocationWithin(interests, circle));
+        buzzDtos = Buzz.convertToDto(buzzRepository.findByInterestsInAndLocationWithin(interests, circle));
         return new BuzzByInterestDto(buzzDtos);
     }
 }

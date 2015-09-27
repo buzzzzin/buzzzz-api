@@ -67,7 +67,7 @@ public class Buzz {
         this.interests = buzzCommand.getInterests();
         this.email = buzzCommand.getAuthEmail();
         this.activeStatus = Status.SCHEDULED;
-        this.description=buzzCommand.getDescription();
+        this.description = buzzCommand.getDescription();
     }
 
 
@@ -83,6 +83,7 @@ public class Buzz {
         buzzDto.setStats(new BuzzStatsDto(this.stats));
         buzzDto.setEmail(this.email);
         buzzDto.setDescription(this.description);
+        buzzDto.setRsvpStatus("");
         return buzzDto;
     }
 
