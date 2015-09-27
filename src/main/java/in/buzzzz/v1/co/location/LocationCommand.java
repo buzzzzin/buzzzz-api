@@ -6,7 +6,7 @@ public class LocationCommand extends PaginationCommand {
 
     private Double latitude = 28.6328;
     private Double longitude = 77.2197;
-    private Integer radius = 5000;
+    private Double radius = 10.00;
 
     @Override
     public String toString() {
@@ -33,11 +33,11 @@ public class LocationCommand extends PaginationCommand {
         this.longitude = longitude;
     }
 
-    public Integer getRadius() {
+    public Double getRadius() {
         return radius;
     }
 
-    public void setRadius(Integer radius) {
+    public void setRadius(Double radius) {
         this.radius = radius;
     }
 }

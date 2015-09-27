@@ -18,10 +18,12 @@ public class LocationDto implements BuzzData {
         this.longitude = longitude;
     }
 
-    public LocationDto(Location location,String address) {
+    public LocationDto(Location location, String address) {
         this.latitude = location.getLatitude() != null ? location.getLatitude().toString() : "";
         this.longitude = location.getLongitude() != null ? location.getLongitude().toString() : "";
         this.address = address != null ? address : "";
+        this.pincode = "";
+        this.city = "";
     }
 
     public String getCity() {
