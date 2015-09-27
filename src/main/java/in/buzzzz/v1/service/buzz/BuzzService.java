@@ -89,6 +89,8 @@ public class BuzzService {
             if (buzz == null) {
                 throw new BuzzNotFoundException();
             }
+            //TODO:in different thread.
+            increaseViewCount(buzz);
             BuzzDto buzzDto = buzz.convertToDto();
             if (authToken != null) {
                 try {
@@ -105,6 +107,25 @@ public class BuzzService {
             return buzzDto;
         }
         throw new BuzzNotFoundException();
+    }
+
+    private void increaseViewCount(Buzz buzz) {
+        try {
+            BuzzStats buzzStats = buzz.getStats();
+            if (buzzStats != null) {
+                if (buzzStats.getViewCount() != null) {
+                    buzzStats.setViewCount(buzzStats.getViewCount() + 1);
+                } else {
+                    buzzStats.setViewCount(1l);
+                }
+            } else {
+                buzzStats = new BuzzStats();
+                buzzStats.setViewCount(1l);
+            }
+            buzzRepository.save(buzz);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public RSVPData rsvp(String authToken, RSVPCommand rsvpCommand) throws GenericException {
