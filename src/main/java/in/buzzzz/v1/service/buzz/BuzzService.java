@@ -198,10 +198,10 @@ public class BuzzService {
 
     public BuzzByInterestDto trending(LocationCommand locationCommand) {
         List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
-//        Circle circle = new Circle(locationCommand.getLatitude(), locationCommand.getLongitude(), locationCommand.getRadius());
-        System.out.println(locationCommand.getRadius());
-        Circle circle = new Circle(new Point(locationCommand.getLatitude(), locationCommand.getLongitude()), new Distance(locationCommand.getRadius(), Metrics.KILOMETERS));
-        buzzDtos = Buzz.convertToDto(buzzRepository.findByLocationWithin(circle));
+        Circle circle = new Circle(locationCommand.getLatitude(), locationCommand.getLongitude(), (locationCommand.getRadius())/(Metrics.KILOMETERS.getMultiplier()));
+//        Circle circle = new Circle(new Point(locationCommand.getLatitude(), locationCommand.getLongitude()), new Distance(locationCommand.getRadius(), Metrics.KILOMETERS));
+//        buzzDtos = Buzz.convertToDto(buzzRepository.findByLocationWithin(circle));
+        buzzDtos = Buzz.convertToDto(buzzRepository.findByLocationNear(new Point(locationCommand.getLatitude(), locationCommand.getLongitude()), new Distance(locationCommand.getRadius(), Metrics.KILOMETERS)));
         return new BuzzByInterestDto(buzzDtos);
     }
 }
