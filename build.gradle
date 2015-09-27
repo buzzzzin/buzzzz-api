@@ -28,7 +28,8 @@ repositories {
     mavenCentral()
 }
 
-task stage(dependsOn: ['clean', 'build'])
+task stage(dependsOn: ['clean', 'jar', 'build'])
+
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")

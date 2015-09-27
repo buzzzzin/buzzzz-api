@@ -58,7 +58,7 @@ public class BuzzService {
 
     public List<BuzzDto> findBuzzNearMe(LocationCommand locationCommand) {
         List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
-        Circle circle = new Circle(locationCommand.getLatitude(), locationCommand.getLongitude(), locationCommand.getRadius());
+        Circle circle = new Circle(locationCommand.getLatitude(), locationCommand.getLongitude(), locationCommand.getRadius()/6378.1);
         buzzDtos = Buzz.convertToDto(buzzRepository.findByLocationWithin(circle));
         return buzzDtos;
     }
