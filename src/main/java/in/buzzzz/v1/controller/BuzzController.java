@@ -3,6 +3,7 @@ package in.buzzzz.v1.controller;
 import in.buzzzz.util.exceptions.GenericException;
 import in.buzzzz.v1.co.buzz.BuzzByInterestCommand;
 import in.buzzzz.v1.co.buzz.BuzzCommand;
+import in.buzzzz.v1.co.location.LocationCommand;
 import in.buzzzz.v1.co.rsvp.RSVPCommand;
 import in.buzzzz.v1.data.response.ResponseDto;
 import in.buzzzz.v1.response.PrepareErrorResponseService;
@@ -37,13 +38,19 @@ public class BuzzController {
                                @RequestHeader(value = "X-Auth-Token", required = false) String authToken,
                                @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         System.out.println(buzzId);
-        return prepareBuzzResponseService.createBuzzPrevireResponse(buzzService.preview(buzzId,authToken), locale);
+        return prepareBuzzResponseService.createBuzzPrevireResponse(buzzService.preview(buzzId, authToken), locale);
     }
 
     @RequestMapping(value = "/buzzByInterest")
     public ResponseDto findAllBuzzByInterest(@RequestBody BuzzByInterestCommand buzzByInterestCommand,
                                              @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
         return prepareBuzzResponseService.createAllBuzzByInterestResponse(buzzService.findAllBuzzByInterest(buzzByInterestCommand), locale);
+    }
+
+    @RequestMapping(value = "/trending")
+    public ResponseDto trending(@RequestBody LocationCommand locationCommand,
+                                             @RequestHeader(value = "Accept-Language", defaultValue = "UK") String locale) {
+        return prepareBuzzResponseService.createAllBuzzByInterestResponse(buzzService.trending(locationCommand), locale);
     }
 
     @RequestMapping(value = "/rsvp", method = RequestMethod.POST)

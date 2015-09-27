@@ -169,4 +169,11 @@ public class BuzzService {
         buzzDtos = Buzz.convertToDto(buzzRepository.findByInterestsInAndLocationWithin(interests, circle));
         return new BuzzByInterestDto(buzzDtos);
     }
+
+    public BuzzByInterestDto trending(LocationCommand locationCommand) {
+        List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
+        Circle circle = new Circle(locationCommand.getLatitude(), locationCommand.getLongitude(), locationCommand.getRadius());
+        buzzDtos = Buzz.convertToDto(buzzRepository.findByLocationWithin(circle));
+        return new BuzzByInterestDto(buzzDtos);
+    }
 }
