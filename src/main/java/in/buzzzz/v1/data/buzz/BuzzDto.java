@@ -1,6 +1,7 @@
 package in.buzzzz.v1.data.buzz;
 
 import in.buzzzz.data.buzz.BuzzData;
+import in.buzzzz.util.constants.BuzzConstants;
 
 import java.util.List;
 
@@ -83,6 +84,9 @@ public class BuzzDto implements BuzzData {
     }
 
     public String getImageName() {
+        if (imageName == null || imageName.equals("")) {
+            return BuzzConstants.defaultImage;
+        }
         return imageName;
     }
 
