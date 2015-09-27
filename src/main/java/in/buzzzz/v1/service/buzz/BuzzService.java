@@ -29,6 +29,9 @@ import in.buzzzz.v1.service.tag.TagBuzzMappingService;
 import in.buzzzz.v1.service.tag.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Circle;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
+import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -195,7 +198,9 @@ public class BuzzService {
 
     public BuzzByInterestDto trending(LocationCommand locationCommand) {
         List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
-        Circle circle = new Circle(locationCommand.getLatitude(), locationCommand.getLongitude(), locationCommand.getRadius());
+//        Circle circle = new Circle(locationCommand.getLatitude(), locationCommand.getLongitude(), locationCommand.getRadius());
+        System.out.println(locationCommand.getRadius());
+        Circle circle = new Circle(new Point(locationCommand.getLatitude(), locationCommand.getLongitude()), new Distance(locationCommand.getRadius(), Metrics.KILOMETERS));
         buzzDtos = Buzz.convertToDto(buzzRepository.findByLocationWithin(circle));
         return new BuzzByInterestDto(buzzDtos);
     }
