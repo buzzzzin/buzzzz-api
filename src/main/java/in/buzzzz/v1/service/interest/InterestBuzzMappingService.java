@@ -13,8 +13,12 @@ public class InterestBuzzMappingService {
     private InterestBuzzMappingRepository interestBuzzMappingRepository;
 
     public void createInterestBuggMapping(InterestBuzzMappingDto dto) {
-        for (String interest : dto.getInterests()) {
-            save(interest, dto.getBuzzId(), dto.getBuzzName());
+        try {
+            for (String interest : dto.getInterests()) {
+                save(interest, dto.getBuzzId(), dto.getBuzzName());
+            }
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
         }
     }
 
