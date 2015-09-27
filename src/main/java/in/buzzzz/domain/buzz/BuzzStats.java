@@ -8,6 +8,17 @@ public class BuzzStats {
     private Long viewCount =0l;
     private transient Long responseCount =0l;
 
+    @Override
+    public String toString() {
+        return "BuzzStats{" +
+                "goingCount=" + goingCount +
+                ", notComingCount=" + notComingCount +
+                ", mayBeCount=" + mayBeCount +
+                ", viewCount=" + viewCount +
+                ", responseCount=" + responseCount +
+                '}';
+    }
+
     public Long getGoingCount() {
         return goingCount;
     }

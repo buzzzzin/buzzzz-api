@@ -122,6 +122,8 @@ public class BuzzService {
                 buzzStats = new BuzzStats();
                 buzzStats.setViewCount(1l);
             }
+            System.out.println(buzzStats.toString());
+            buzz.setStats(buzzStats);
             buzzRepository.save(buzz);
         } catch (Exception e) {
             System.out.println(e.getMessage());
