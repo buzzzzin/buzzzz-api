@@ -103,7 +103,7 @@ public class BuzzService {
                 try {
                     UserAuthMapping userAuthMapping = userAuthMappingRepository.findByAuthToken(authToken);
                     System.out.println(userAuthMapping.toString());
-                    RSVP rsvp = rsvpRepository.findByEmail(userAuthMapping.getEmail());
+                    RSVP rsvp = rsvpRepository.findByBuzzIdAndEmail(buzz.getId(),userAuthMapping.getEmail());
                     if (rsvp != null) {
                         buzzDto.setRsvpStatus(rsvp.getStatus() != null ? rsvp.getStatus().toString() : "");
                     }
