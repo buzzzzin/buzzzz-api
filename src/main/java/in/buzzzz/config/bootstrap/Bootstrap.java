@@ -93,6 +93,7 @@ public class Bootstrap implements InitializingBean {
                 buzz3.setDateCreated(new Date());
                 buzz3.setLastUpdated(new Date());
                 buzz3.setIsRSVP(true);
+                buzz3.setDescription("This is a coding event. Eat no Sleep Code Repeat");
                 buzz3.setSchedule(new Schedule("25-09-2015 18:00:00", "27-09-2015 23:10:11", Schedule.Period.DAILY));
                 buzz3.setLocation(new Location(28.535980, 77.345651, "Logix Techno prak, Sector-127, Noida"));
                 buzz3.setTags(Arrays.asList("code", "no sleep"));
@@ -108,6 +109,7 @@ public class Bootstrap implements InitializingBean {
                 buzz1.setInterests(Arrays.asList("Blood", "Health"));
                 buzz1.setDateCreated(new Date());
                 buzz1.setLastUpdated(new Date());
+                buzz1.setDescription("Done Blood and save others life");
                 buzz1.setIsRSVP(true);
                 buzz1.setSchedule(new Schedule("29-09-2015 09:00:00", "29-09-2015 23:10:11", Schedule.Period.DAILY));
                 buzzRepository.save(buzz1);
@@ -122,6 +124,7 @@ public class Bootstrap implements InitializingBean {
                 buzz2.setDateCreated(new Date());
                 buzz2.setLastUpdated(new Date());
                 buzz2.setIsRSVP(true);
+                buzz2.setDescription("India's biggest Groovy and Grails conference in Delhi");
                 buzz2.setSchedule(new Schedule("25-01-2016 09:00:00", "26-01-2016 23:10:11", Schedule.Period.DAILY));
                 buzzRepository.save(buzz2);
 
@@ -135,6 +138,7 @@ public class Bootstrap implements InitializingBean {
                 buzz.setDateCreated(new Date());
                 buzz.setLastUpdated(new Date());
                 buzz.setIsRSVP(true);
+                buzz.setDescription("Half Marathan");
                 buzz.setSchedule(new Schedule("25-09-2015 18:00:00", "27-09-2015 23:10:11", Schedule.Period.DAILY));
                 buzzRepository.save(buzz);
 
@@ -148,6 +152,7 @@ public class Bootstrap implements InitializingBean {
                 buzz4.setDateCreated(new Date());
                 buzz4.setLastUpdated(new Date());
                 buzz4.setIsRSVP(true);
+                buzz4.setDescription("Come join our party");
                 buzz4.setSchedule(new Schedule("25-09-2015 18:00:00", "27-09-2015 23:10:11", Schedule.Period.DAILY));
                 buzzRepository.save(buzz4);
 
