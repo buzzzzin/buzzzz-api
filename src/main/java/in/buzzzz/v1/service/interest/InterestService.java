@@ -28,9 +28,9 @@ public class InterestService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<InterestDto> trendingInterests(){
-        Pageable pageable = new PageRequest(0,25,null);
-        return Interest.convertToDto(interestRepository.findAllByTrending(true,pageable));
+    public List<InterestDto> trendingInterests() {
+        Pageable pageable = new PageRequest(0, 25, null);
+        return Interest.convertToDto(interestRepository.findAllByTrending(true, pageable));
     }
 
     public InterestDataDto list() {
@@ -42,7 +42,7 @@ public class InterestService {
         return new InterestDataDto(interestDtos);
     }
 
-    public List<InterestDto> subscribe(InterestCommand interestCommand, String authToken) throws GenericException{
+    public List<InterestDto> subscribe(InterestCommand interestCommand, String authToken) throws GenericException {
         String email = authenticationService.authenticateToken(authToken);
         interestCommand.setAuthEmail(email);
         Interest interest = interestRepository.findById(interestCommand.getInterestId());
@@ -67,11 +67,17 @@ public class InterestService {
         }
     }
 
-    public void increaseInterestCount(List<String> interests){
-        for(String interest:interests){
-            Interest interestInstance=interestRepository.findByName(interest);
-            interestInstance.setUsedCount(interestInstance.getUsedCount()+1);
-            interestRepository.save(interestInstance);
+    public void increaseInterestCount(List<String> interests) {
+        try {
+            for (String interest : interests) {
+                Interest interestInstance = interestRepository.findByName(interest);
+                if (interestInstance != null) {
+                    interestInstance.setUsedCount(interestInstance.getUsedCount() + 1);
+                    interestRepository.save(interestInstance);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

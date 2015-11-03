@@ -16,9 +16,13 @@ public class TagBuzzMappingService {
     private TagBuzzMappingRepository tagBuzzMappingRepository;
 
     public void createTagBuzzMapping(TagBuzzMappingDto tagBuzzMappingDto) {
-        List<String> tags = tagBuzzMappingDto.getTags();
-        for (String tag : tags) {
-            saveTagBuzzMapping(tag, tagBuzzMappingDto.getBuzzName(), tagBuzzMappingDto.getBuzzId());
+        try {
+            List<String> tags = tagBuzzMappingDto.getTags();
+            for (String tag : tags) {
+                saveTagBuzzMapping(tag, tagBuzzMappingDto.getBuzzName(), tagBuzzMappingDto.getBuzzId());
+            }
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
         }
     }
 

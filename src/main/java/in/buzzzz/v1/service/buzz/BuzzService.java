@@ -1,5 +1,7 @@
 package in.buzzzz.v1.service.buzz;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.util.JSON;
 import in.buzzzz.data.rsvp.RSVPData;
 import in.buzzzz.domain.buzz.Buzz;
 import in.buzzzz.domain.buzz.BuzzStats;
@@ -29,6 +31,10 @@ import in.buzzzz.v1.service.tag.TagBuzzMappingService;
 import in.buzzzz.v1.service.tag.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Circle;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.querydsl.QueryDslUtils;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -39,6 +45,8 @@ import java.util.List;
 @Service
 public class BuzzService {
 
+    @Autowired
+    MongoTemplate mongoTemplate;
     @Autowired
     private BuzzRepository buzzRepository;
     @Autowired
@@ -57,10 +65,9 @@ public class BuzzService {
     private InterestBuzzMappingService interestBuzzMappingService;
 
     public List<BuzzDto> findBuzzNearMe(LocationCommand locationCommand) {
-        List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
-        Circle circle = new Circle(locationCommand.getLatitude(), locationCommand.getLongitude(), locationCommand.getRadius()/6378.1);
-        buzzDtos = Buzz.convertToDto(buzzRepository.findByLocationWithin(circle));
-        return buzzDtos;
+        Query query = getQuery(locationCommand);
+        List<Buzz> buzzs = mongoTemplate.find(query, Buzz.class);
+        return Buzz.convertToDto(buzzs);
     }
 
 
@@ -89,12 +96,14 @@ public class BuzzService {
             if (buzz == null) {
                 throw new BuzzNotFoundException();
             }
+            //TODO:in different thread.
+            increaseViewCount(buzz);
             BuzzDto buzzDto = buzz.convertToDto();
             if (authToken != null) {
                 try {
                     UserAuthMapping userAuthMapping = userAuthMappingRepository.findByAuthToken(authToken);
                     System.out.println(userAuthMapping.toString());
-                    RSVP rsvp = rsvpRepository.findByEmail(userAuthMapping.getEmail());
+                    RSVP rsvp = rsvpRepository.findByBuzzIdAndEmail(buzz.getId(),userAuthMapping.getEmail());
                     if (rsvp != null) {
                         buzzDto.setRsvpStatus(rsvp.getStatus() != null ? rsvp.getStatus().toString() : "");
                     }
@@ -105,6 +114,27 @@ public class BuzzService {
             return buzzDto;
         }
         throw new BuzzNotFoundException();
+    }
+
+    private void increaseViewCount(Buzz buzz) {
+        try {
+            BuzzStats buzzStats = buzz.getStats();
+            if (buzzStats != null) {
+                if (buzzStats.getViewCount() != null) {
+                    buzzStats.setViewCount(buzzStats.getViewCount() + 1);
+                } else {
+                    buzzStats.setViewCount(1l);
+                }
+            } else {
+                buzzStats = new BuzzStats();
+                buzzStats.setViewCount(1l);
+            }
+            System.out.println(buzzStats.toString());
+            buzz.setStats(buzzStats);
+            buzzRepository.save(buzz);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public RSVPData rsvp(String authToken, RSVPCommand rsvpCommand) throws GenericException {
@@ -165,8 +195,28 @@ public class BuzzService {
         List<BuzzDto> buzzDtos = new LinkedList<BuzzDto>();
         List<String> interests = new ArrayList<String>();
         interests.add(buzzByInterestCommand.getInterest());
-        Circle circle = new Circle(buzzByInterestCommand.getLatitude(), buzzByInterestCommand.getLongitude(), buzzByInterestCommand.getRadius());
-        buzzDtos = Buzz.convertToDto(buzzRepository.findByInterestsAndLocationWithin(interests, circle));
+        Query query = getQuery(buzzByInterestCommand);
+        query.addCriteria(Criteria.where("interests").in(interests));
+        List<Buzz> buzzs = mongoTemplate.find(query, Buzz.class);
+        buzzDtos = Buzz.convertToDto(buzzs);
         return new BuzzByInterestDto(buzzDtos);
+    }
+
+    public BuzzByInterestDto trending(LocationCommand locationCommand) {
+        Query query = getQuery(locationCommand);
+        List<Buzz> buzzs = mongoTemplate.find(query, Buzz.class);
+        return new BuzzByInterestDto(Buzz.convertToDto(buzzs));
+    }
+
+    private Query getQuery(LocationCommand locationCommand) {
+        return Query.query(
+                Criteria.where("location").is(
+                        Criteria.where("$near").is(
+                                Criteria.where("$geometry").is(
+                                        Criteria.where("type").is("Point").and("coordinates").is(new Double[]{locationCommand.getLongitude(), locationCommand.getLatitude()}).getCriteriaObject()
+                                ).and("$maxDistance").is(locationCommand.getRadius()).getCriteriaObject()
+                        ).getCriteriaObject()
+                )
+        );
     }
 }

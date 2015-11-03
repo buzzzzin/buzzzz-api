@@ -22,7 +22,7 @@ public class PrepareBuzzResponseService extends Response {
 
     public ResponseDto createAllBuzzByInterestResponse(Object data, String locale) {
         ResponseDto responseDto = new ResponseDto(data);
-        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.BUZZ_PREVIEW_SUCCESS, null, getLocale(locale)));
+        responseDto.setMessage(getMessageSource().getMessage(SuccessCodes.BUZZ_BY_INTEREST_SUCCESS, null, getLocale(locale)));
         return responseDto;
     }
 

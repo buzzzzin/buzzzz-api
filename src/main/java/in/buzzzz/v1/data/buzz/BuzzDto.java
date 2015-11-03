@@ -1,6 +1,7 @@
 package in.buzzzz.v1.data.buzz;
 
 import in.buzzzz.data.buzz.BuzzData;
+import in.buzzzz.util.constants.BuzzConstants;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class BuzzDto implements BuzzData {
     private BuzzStatsDto stats;
     private String email;
     private String rsvpStatus;
+    private String description;
 
     public String getRsvpStatus() {
         return rsvpStatus;
@@ -82,6 +84,9 @@ public class BuzzDto implements BuzzData {
     }
 
     public String getImageName() {
+        if (imageName == null || imageName.equals("")) {
+            return BuzzConstants.defaultImage;
+        }
         return imageName;
     }
 
@@ -95,5 +100,13 @@ public class BuzzDto implements BuzzData {
 
     public void setIsRSVP(Boolean isRSVP) {
         this.isRSVP = isRSVP;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

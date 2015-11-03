@@ -34,6 +34,8 @@ public class Buzz {
     private List<String> interests;
     private String email;
     private Status activeStatus;
+    private String description;
+    private String address;
 
     @Override
     public String toString() {
@@ -60,12 +62,14 @@ public class Buzz {
         this.dateCreated = new Date();
         this.lastUpdated = new Date();
         this.isRSVP = buzzCommand.getIsRSVP();
-        this.location = new Location(buzzCommand.getLatitude(), buzzCommand.getLongitude(), buzzCommand.getAddress());
+        this.location = new Location(buzzCommand.getLatitude(), buzzCommand.getLongitude());
         this.schedule = new Schedule(buzzCommand.getStartTime(), buzzCommand.getEndTime(), buzzCommand.getPeriod());
         this.tags = buzzCommand.getTags();
         this.interests = buzzCommand.getInterests();
         this.email = buzzCommand.getAuthEmail();
         this.activeStatus = Status.SCHEDULED;
+        this.description = buzzCommand.getDescription();
+        this.address = buzzCommand.getAddress();
     }
 
 
@@ -76,11 +80,21 @@ public class Buzz {
         buzzDto.setImageName(this.imageName);
         buzzDto.setIsRSVP(this.isRSVP);
         buzzDto.setInterests(this.interests);
-        buzzDto.setLocation(new LocationDto(this.location));
+        buzzDto.setLocation(new LocationDto(this.location, this.address));
         buzzDto.setSchedule(new ScheduleDto(this.schedule));
         buzzDto.setStats(new BuzzStatsDto(this.stats));
         buzzDto.setEmail(this.email);
+        buzzDto.setDescription(this.description);
+        buzzDto.setRsvpStatus("");
         return buzzDto;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Status getActiveStatus() {
@@ -185,5 +199,13 @@ public class Buzz {
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
